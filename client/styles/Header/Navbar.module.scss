@@ -104,6 +104,16 @@
                 height: 16px;
             }
         }
+
+        &_notify {
+            display: flex;
+            position: relative;
+
+            &:hover .notify_hover {
+                display: block;
+            }
+        }
+
         .lang_hover {
             position: relative;
             cursor: pointer;

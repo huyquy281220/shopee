@@ -27,10 +27,10 @@ export default function Search() {
                         <a className={styles.search_nav_item}>Áo khoác</a>
                     </Link>
                     <Link href="/" legacyBehavior>
-                        <a className={styles.search_nav_item}>Áo khoác</a>
+                        <a className={styles.search_nav_item}>Dép</a>
                     </Link>
                     <Link href="/" legacyBehavior>
-                        <a className={styles.search_nav_item}>Áo khoác</a>
+                        <a className={styles.search_nav_item}>Túi xách nữ</a>
                     </Link>
                 </div>
             </div>

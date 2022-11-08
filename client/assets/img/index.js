@@ -4,6 +4,7 @@ const Images = {
     app_store: require("./app-store.png").default,
     gg_play: require("./gg-play.png").default,
     gallery: require("./gallery.png").default,
+    notify: require("./notify-img.png").default,
 }
 
 export default Images;
