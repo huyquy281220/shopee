@@ -1,12 +1,23 @@
 import styles from "../../styles/Header/Search.module.scss";
 import Images from "../../assets/img";
+import CartPopover from "./Popover/Cart";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function Search() {
+    const [style, setStyle] = useState({ display: "none" });
+
+    const handleShowPopover = () => {
+        setStyle({ display: "flex" });
+    };
+    const handleHidePopover = () => {
+        setStyle({ display: "none" });
+    };
+
     return (
         <div className={styles.wrapper}>
             <Link href="/">
@@ -36,10 +47,11 @@ export default function Search() {
             </div>
             <div className={styles.search_cart}>
                 <Link href="/" legacyBehavior>
-                    <a className={styles.search_cart_item}>
+                    <a className={styles.search_cart_item} onMouseEnter={handleShowPopover} onMouseLeave={handleHidePopover}>
                         <FontAwesomeIcon icon={faCartShopping} />
                     </a>
                 </Link>
+                <CartPopover style={style} />
             </div>
         </div>
     );
