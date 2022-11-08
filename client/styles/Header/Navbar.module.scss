@@ -1,0 +1,178 @@
+@import "../mixins";
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: 1200px;
+    height: 35px;
+
+    .navbar_left,
+    .navbar_right {
+        display: flex;
+    }
+
+    .navbar_left {
+        &_item {
+            margin-right: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--white);
+
+            &:hover {
+                color: hsla(0, 0%, 100%, 0.7);
+            }
+
+            &:last-child {
+                display: flex;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+        }
+        .social_icon {
+            margin-left: 8px;
+
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        .download_drawer {
+            position: relative;
+            display: flex;
+
+            &:hover .download_drawer_content {
+                display: block;
+            }
+            
+            &_content {
+                display: none;
+                position: absolute;
+                width: 185px;
+                left: 0;
+                top: 180%;
+                z-index: 300;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 20px;
+                    right: 0;
+                    top: -20px;
+                    background-color: transparent;
+                }
+
+                .qr_code {
+                    width: 100%;
+                }
+
+                .download_apps {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    padding: 0 15px 5px;
+
+                    &_item {
+                        margin-top: 8px;
+                        width: 70px;
+                        height: 17px;
+                    }
+                }
+            }
+        }
+    }
+
+    .navbar_right {
+        &_item {
+            display: flex;
+            align-items: center;
+            margin-left: 12px;
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+
+            &:hover {
+                color: hsla(0, 0%, 100%, 0.7);
+            }
+
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        .lang_hover {
+            position: relative;
+            cursor: pointer;
+
+            &:hover .navbar_right_hover {
+                display: block;
+            }
+        }
+        .navbar_right_hover {
+            position: absolute;
+            display: none;
+            top: 150%;
+            right: 0;
+            border-radius: 2px;
+            transform-origin: 145px top;
+            animation: lang_animation 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+            @include notify-aniamtion(lang_animation);
+            z-index: 10;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -25%;
+                right: 0;
+                transform: translateY(50%);
+                width: 120px;
+                height: 20px;
+                background-color: transparent;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: -10px;
+                right: 25%;
+                width: 0;
+                height: 0;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid #fff;
+            }
+        }
+        .lang_hover:hover .navbar_right_hover {
+            display: block;
+        }
+        .navbar_right_lang {
+            display: block;
+            width: 200px;
+            padding: 10px 16px;
+            font-size: 14px;
+            color: #000;
+            background-color: #fff;
+
+            &:hover {
+                color: var(--primary-color);
+            }
+
+            &:first-child {
+                border-top-left-radius: 2px;
+                border-top-right-radius: 2px;
+            }
+
+            &:last-child {
+                border-bottom-left-radius: 2px;
+                border-bottom-right-radius: 2px;
+            }
+        }
+        .navbar_right_icon {
+            margin: 0 5px;
+        }
+    }
+}
