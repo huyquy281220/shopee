@@ -80,10 +80,10 @@ export default function Navbar() {
                         </a>
                     </div>
                 </div>
-                <Link href="/" legacyBehavior>
+                <Link href="/auth/register" legacyBehavior>
                     <a className={styles.navbar_right_item}>Đăng ký</a>
                 </Link>
-                <Link href="/" legacyBehavior>
+                <Link href="/auth/login" legacyBehavior>
                     <a className={styles.navbar_right_item}>Đăng nhập</a>
                 </Link>
             </div>
