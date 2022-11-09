@@ -180,6 +180,10 @@
                         border: 1px solid rgba(0, 0, 0, 0.14);
                         border-radius: 2px;
                         filter: none;
+
+                        &::placeholder {
+                            color: #ccc;
+                        }
                     }
                 }
 
