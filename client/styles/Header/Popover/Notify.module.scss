@@ -12,6 +12,7 @@
     transform-origin: 350px top;
     animation: notify_animation 0.2s cubic-bezier(0.4, 0, 0.6, 1);
     @include notify-aniamtion(notify_animation);
+    z-index: 100;
 
     &::before {
         content: "";
@@ -33,7 +34,6 @@
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
         border-bottom: 10px solid #fff;
-        z-index: 1000;
     }
 
     .customer {

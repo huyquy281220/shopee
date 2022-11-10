@@ -16,6 +16,7 @@
     transform-origin: 350px top;
     animation: notify_animation 0.2s cubic-bezier(0.4, 0, 0.6, 1);
     @include notify-aniamtion(notify_animation);
+    z-index: 100;
 
     &::before {
         content: "";
@@ -25,7 +26,6 @@
         width: 100px;
         height: 20px;
         background-color: transparent;
-        z-index: 1000;
     }
 
     &::after {
