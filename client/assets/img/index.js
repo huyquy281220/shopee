@@ -12,7 +12,43 @@ const Images = {
     logo_gg: require("./logo_gg.jpg").default,
     logo_apple: require("./logo_apple.svg").default,
     banner: require("./banner.png").default,
-    sub_banner: require("./sub-banner.png").default
+    sub_banner: require("./sub-banner.png").default,
+    simple_banner: require("./simple-banner.png").default,
+    sub_categories: [
+        {
+            title: "Khung giờ săn Sale",
+            img: require("./sub-category-8.gif").default,
+        },
+        {
+            title: "Gì cũng rẻ - Mua là Freeship",
+            img: require("./sub-category-7.png").default,
+        },
+        {
+            title: "Flash Sale",
+            img: require("./sub-category-6.png").default,
+        },
+        {
+            title: "Bắt trend - Giá sốc",
+            img: require("./sub-category-5.png").default,
+        },
+        {
+            title: "Hoàn xu extra trừ 100K",
+            img: require("./sub-category-4.png").default,
+        },
+        {
+            title: "Hàng hiệu giá tốt",
+            img: require("./sub-category-3.png").default,
+        },
+        {
+            title: "hàng quốc tế - thương hiệu",
+            img: require("./sub-category-2.png").default,
+        },
+        {
+            title: "nạp thẻ & dịch vụ",
+            img: require("./sub-category.png").default,
+        },
+    ],
+    category: require("./category.png").default,
 };
 
 export default Images;

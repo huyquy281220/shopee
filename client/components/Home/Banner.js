@@ -1,5 +1,5 @@
-import styles from "../../../styles/Home/Banner.module.scss";
-import images from "../../../assets/img";
+import styles from "../../styles/Home/Banner.module.scss";
+import images from "../../assets/img";
 
 import Image from "next/image";
 import Link from "next/link";
