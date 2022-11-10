@@ -4,6 +4,7 @@ import images from "../../assets/img";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,6 +14,10 @@ export default function Login() {
     const hanldeTogglePassword = () => {
         setIsToggle(!isToggle);
     };
+
+    const handleSubmitForm = () => {
+        
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -30,20 +35,20 @@ export default function Login() {
             <div className={styles.container}>
                 <div className={styles.content}>
                     <div></div>
-                    <form action="">
+                    <form action="/api/form" method="POST">
                         <div className={styles.form}>
                             <div className={styles.form_header}>
                                 <p>Đăng nhập</p>
                             </div>
                             <div className={styles.form_content}>
                                 <div className={styles.email}>
-                                    <input type="email" placeholder="Email/Số điện thoại/Tên đăng nhập" autoComplete="on" maxLength={128} />
+                                    <input type="email" name="email" placeholder="Email/Số điện thoại/Tên đăng nhập" autoComplete="on" maxLength={128} />
                                 </div>
                                 <div className={styles.password}>
-                                    <input type={isToggle ? "text" : "password"} placeholder="Mật khẩu" maxLength={128} />
+                                    <input type={isToggle ? "text" : "password"} name="password" placeholder="Mật khẩu" />
                                     <FontAwesomeIcon icon={isToggle ? faEyeSlash : faEye} className={styles.eye} onClick={hanldeTogglePassword} />
                                 </div>
-                                <button className={styles.btn_login} disabled>
+                                <button className={styles.btn_login}>
                                     Đăng nhập
                                 </button>
                                 <div className={styles.other_login}>

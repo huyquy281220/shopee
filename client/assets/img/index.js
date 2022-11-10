@@ -11,6 +11,8 @@ const Images = {
     logo_fb: require("./logo_fb.svg").default,
     logo_gg: require("./logo_gg.jpg").default,
     logo_apple: require("./logo_apple.svg").default,
-}
+    banner: require("./banner.png").default,
+    sub_banner: require("./sub-banner.png").default
+};
 
 export default Images;

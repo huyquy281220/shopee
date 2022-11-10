@@ -1,7 +1,8 @@
 import Head from "next/head";
-import styles from '../styles/Home.module.scss'
+import styles from '../styles/Home.module.scss';
 
-import Header from '../components/Header'
+import Header from '../components/Header';
+import Banner from '../components/Home/Banner'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <title>Shopee</title>
       </Head>
       <Header />
+      <Banner />
     </div>
   )
 }

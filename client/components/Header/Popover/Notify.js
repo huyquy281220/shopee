@@ -12,8 +12,8 @@ export default function NotifyPopover(notifyStyle){
                 <p>Đăng nhập để xem Thông báo</p>
             </div>
             <div className={styles.user}>
-                <Link href="/" >Đăng ký</Link>
-                <Link href="/" >Đăng nhập</Link>
+                <Link href="/auth/register" >Đăng ký</Link>
+                <Link href="/auth/login" >Đăng nhập</Link>
             </div>
         </div>
     )
