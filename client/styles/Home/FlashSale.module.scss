@@ -1,0 +1,81 @@
+.wrapper {
+    padding: 20px 0;
+    background-color: #f5f5f5;
+
+    .flash_sale {
+        width: 1200px;
+        margin: 0 auto;
+        background-color: var(--white);
+
+        .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            padding: 0 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+            .image {
+                width: 130px;
+                height: 30px;
+            }
+
+            .show_all {
+                color: var(--primary-color);
+
+                &_icon {
+                    margin-left: 5px;
+                }
+            }
+        }
+
+        .content {
+            padding: 10px 0;
+
+            .swiper_wrapper {
+                width: 1200px;
+
+                .swiper_slide {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 190px;
+                    background-color: var(--white);
+
+                    .image {
+                        width: 188px;
+                        height: 188px;
+                    }
+
+                    .description {
+                        margin-top: 8px;
+                        font-size: 12px;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        text-overflow: ellipsis;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        padding: 0 8px;
+                    }
+
+                    .slide_bottom {
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: space-between;
+                        width: 100%;
+                        padding: 8px 8px 0;
+
+                        .price {
+                            color: var(--primary-color);
+                        }
+
+                        .sold {
+                            color: rgba(0, 0, 0, 0.54);
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -49,6 +49,8 @@ const Images = {
         },
     ],
     category: require("./category.png").default,
+    flash_sale: require("./flash-sale.png").default,
+    product: require("./product-img.png").default,
 };
 
 export default Images;

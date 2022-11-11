@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Banner from "../components/Home/Banner.js";
 import SubCategory from "../components/Home/SubCategory";
 import Category from "../components/Home/Category";
+import FlashSale from "../components/Home/FlashSale";
 
 export default function Home() {
     return (
@@ -17,6 +18,7 @@ export default function Home() {
             <Banner />
             <SubCategory />
             <Category />
+            <FlashSale />
         </div>
     );
 }
