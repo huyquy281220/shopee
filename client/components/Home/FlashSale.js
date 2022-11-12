@@ -4,9 +4,9 @@ import images from "../../assets/img";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function FlashSale() {
     return (
@@ -25,15 +25,22 @@ export default function FlashSale() {
                     <Swiper modules={[Navigation]} slidesPerView={6} slidesPerGroup={6} allowTouchMove={false} navigation className={styles.swiper_wrapper}>
                         {Array(12)
                             .fill()
-                            .map(() => {
+                            .map((item, index) => {
                                 return (
-                                    <SwiperSlide className={styles.swiper_slide}>
-                                        <Image src={images.product} alt="product" className={styles.image} />
-                                        <div className={styles.description}>Tee basic ss1 CREWZ áo thun tay lỡ unisex Local Brand - AO_THUN_DVR (V427)</div>
-                                        <div className={styles.slide_bottom}>
+                                    <SwiperSlide key={index}>
+                                        <Link href="#" className={styles.swiper_slide}>
+                                            <div className={styles.badge}>
+                                                <span className={styles.percent}>61%</span>
+                                                <span className={styles.text}>giảm</span>
+                                            </div>
+                                            <Image src={images.product} alt="product" className={styles.image} />
                                             <div className={styles.price}>67.000 VNĐ</div>
-                                            <div className={styles.sold}>Đã bán 1k</div>
-                                        </div>
+                                            <div className={styles.progress_bar}>
+                                                <div className={styles.filler}>
+                                                    <span className={styles.text}>Đã bán 20</span>
+                                                </div>
+                                            </div>
+                                        </Link>
                                     </SwiperSlide>
                                 );
                             })}

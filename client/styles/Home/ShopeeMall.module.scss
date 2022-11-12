@@ -1,0 +1,31 @@
+.wrapper {
+    background-color: #f5f5f5;
+
+    .simple_banner {
+        width: 1200px;
+        margin: 0 auto 20px;
+    }
+
+    .mall {
+        width: 1200px;
+        margin: 0 auto;
+        background-color: var(--white);
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            padding: 0 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+            .show_all {
+                color: var(--primary-color);
+
+                &_icon {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+}

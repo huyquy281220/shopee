@@ -1,24 +1,19 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.scss";
 
-import Header from "../components/Header";
-import Banner from "../components/Home/Banner.js";
-import SubCategory from "../components/Home/SubCategory";
-import Category from "../components/Home/Category";
-import FlashSale from "../components/Home/FlashSale";
+import Layout from "../layouts";
+import Home from "../components/Home";
 
-export default function Home() {
+export default function App() {
     return (
         <div className={styles.container}>
             <Head>
                 <meta name="viewport" content="width=1240,shrink-to-fit=no" />
                 <title>Shopee</title>
             </Head>
-            <Header />
-            <Banner />
-            <SubCategory />
-            <Category />
-            <FlashSale />
+            <Layout>
+                <Home />
+            </Layout>
         </div>
     );
 }

@@ -13,7 +13,10 @@ const Images = {
     logo_apple: require("./logo_apple.svg").default,
     banner: require("./banner.png").default,
     sub_banner: require("./sub-banner.png").default,
-    simple_banner: require("./simple-banner.png").default,
+    simple_banner: [
+        require("./simple-banner.png").default,
+        require("./simple-banner-2.png").default
+    ],
     sub_categories: [
         {
             title: "Khung giờ săn Sale",
@@ -51,6 +54,12 @@ const Images = {
     category: require("./category.png").default,
     flash_sale: require("./flash-sale.png").default,
     product: require("./product-img.png").default,
+    mall_icons: [
+        require("./mall-icon.png").default,
+        require("./mall-icon-2.png").default,
+        require("./mall-icon-3.png").default,
+        require("./mall-icon-4.svg").default,
+    ]
 };
 
 export default Images;

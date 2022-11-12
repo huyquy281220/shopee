@@ -7,7 +7,7 @@ export default function Category() {
     return (
         <div className={styles.wrapper}>
             <div className={styles.simple_banner}>
-                <Image src={images.simple_banner} alt="banner" />
+                <Image src={images.simple_banner[0]} alt="banner" />
             </div>
             <div className={styles.category}>
                 <div className={styles.title}>
@@ -16,9 +16,9 @@ export default function Category() {
                 <div className={styles.content}>
                     {Array(20)
                         .fill()
-                        .map((item,index) => {
+                        .map((item, index) => {
                             return (
-                                <div className={styles.item} key={index} >
+                                <div className={styles.item} key={index}>
                                     <Image src={images.category} alt="category" className={styles.image} />
                                     <div className={styles.name}>Máy ảnh & máy quay phim</div>
                                 </div>
