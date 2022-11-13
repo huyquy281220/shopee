@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
+import { Autoplay, Navigation, Pagination } from "swiper";
 
 export default function ShopeeMall() {
     return (
@@ -44,7 +44,7 @@ export default function ShopeeMall() {
                 </div>
                 <div className={styles.content}>
                     <div className={styles.content_left}>
-                        <Swiper modules={[Navigation, Pagination]} slidesPerView={1} loop navigation pagination={{ clickable: true }} className={styles.swiper_wrapper}>
+                        <Swiper modules={[Navigation, Pagination, Autoplay]} slidesPerView={1} autoplay={{delay:5000}} loop navigation pagination={{ clickable: true }} className={styles.swiper_wrapper}>
                             {images.mall_banners.map((item, index) => {
                                 return (
                                     <SwiperSlide key={index}>
