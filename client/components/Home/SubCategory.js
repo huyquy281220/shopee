@@ -11,7 +11,7 @@ export default function Category() {
         <div className={styles.wrapper}>
             {categoryImgs.map((item, index) => {
                 return (
-                    <Link href="" key={index} legacyBehavior>
+                    <Link href="#" key={index} legacyBehavior>
                         <a className={styles.item}>
                             <Image src={item.img} alt={item.title} className={styles.image} />
                             <div className={styles.title}>{item.title}</div>

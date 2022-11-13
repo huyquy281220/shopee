@@ -60,17 +60,44 @@
 
         .content {
             display: flex;
+            justify-content: space-between;
 
             &_left {
                 width: 390px;
-                height: 450px;
+                height: 470px;
                 padding: 10px 10px 0;
-                background-color: red;
+                background-color: var(--white);
+                
+                .swiper_wrapper {
+                    height: 100%;
+                }
             }
-
+            
             &_right{
                 width: 800px;
-                background-color: yellow;
+                padding: 10px 10px 0;
+                background-color: var(--white);
+
+                .swiper_wrapper {
+                    height: 100%;
+                    text-align: center;
+
+                    .swiper_item {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+
+                        a {
+                            display: block;
+    
+                            .desc {
+                                text-align: center;
+                                font-size: 18px;
+                                color: #d0011b;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

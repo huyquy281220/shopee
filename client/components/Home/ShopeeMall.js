@@ -43,8 +43,83 @@ export default function ShopeeMall() {
                     </Link>
                 </div>
                 <div className={styles.content}>
-                    <div className={styles.content_left}></div>
-                    <div className={styles.content_right}></div>
+                    <div className={styles.content_left}>
+                        <Swiper modules={[Navigation, Pagination]} slidesPerView={1} loop navigation pagination={{ clickable: true }} className={styles.swiper_wrapper}>
+                            {images.mall_banners.map((item, index) => {
+                                return (
+                                    <SwiperSlide key={index}>
+                                        <Link href="#">
+                                            <Image src={item} alt="mall-banner" className={styles.image} />
+                                        </Link>
+                                    </SwiperSlide>
+                                );
+                            })}
+                        </Swiper>
+                    </div>
+                    <div className={styles.content_right}>
+                        <Swiper modules={[Navigation]} navigation slidesPerView={4} slidesPerGroup={4} className={styles.swiper_wrapper}>
+                            <SwiperSlide className={styles.swiper_item}>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                            </SwiperSlide>
+                            <SwiperSlide className={styles.swiper_item}>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                            </SwiperSlide>
+                            <SwiperSlide className={styles.swiper_item}>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                            </SwiperSlide>
+                            <SwiperSlide className={styles.swiper_item}>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                            </SwiperSlide>
+                            <SwiperSlide className={styles.swiper_item}>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                            </SwiperSlide>
+                            <SwiperSlide className={styles.swiper_item}>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                                <Link href="#">
+                                    <Image src={images.mall_img} alt="img" />
+                                    <div className={styles.desc}>Giảm đến 50%</div>
+                                </Link>
+                            </SwiperSlide>
+                        </Swiper>
+                    </div>
                 </div>
             </div>
         </div>
