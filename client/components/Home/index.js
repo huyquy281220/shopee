@@ -4,6 +4,7 @@ import Category from "./Category";
 import FlashSale from "./FlashSale";
 import ShopeeMall from "./ShopeeMall";
 import TopSearch from "./TopSearch.js";
+import Suggestion from "./Suggestion.js";
 
 export default function Home() {
     return (
@@ -14,6 +15,7 @@ export default function Home() {
             <FlashSale />
             <ShopeeMall />
             <TopSearch />
+            <Suggestion />
         </div>
     );
 }
