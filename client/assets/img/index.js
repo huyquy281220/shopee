@@ -54,6 +54,8 @@ const Images = {
     mall_icons: [require("./mall-icon.png").default, require("./mall-icon-2.png").default, require("./mall-icon-3.png").default, require("./mall-icon-4.svg").default],
     mall_banners: [require("./mall-banner.png").default, require("./mall-banner-2.png").default, require("./mall-banner-3.png").default],
     mall_img: require("./mall-img.png").default,
+    top_search: require("./top-search.png").default,
+    top_search_icon: require("./top-search-icon.png").default,
 };
 
 export default Images;

@@ -57,7 +57,7 @@ export default function ShopeeMall() {
                         </Swiper>
                     </div>
                     <div className={styles.content_right}>
-                        <Swiper modules={[Navigation]} navigation slidesPerView={4} slidesPerGroup={4} className={styles.swiper_wrapper}>
+                        <Swiper modules={[Navigation]} navigation slidesPerView={4} slidesPerGroup={4} spaceBetween={20} allowTouchMove={false} className={styles.swiper_wrapper}>
                             <SwiperSlide className={styles.swiper_item}>
                                 <Link href="#">
                                     <Image src={images.mall_img} alt="img" />

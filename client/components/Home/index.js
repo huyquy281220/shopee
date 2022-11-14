@@ -3,6 +3,7 @@ import SubCategory from "./SubCategory";
 import Category from "./Category";
 import FlashSale from "./FlashSale";
 import ShopeeMall from "./ShopeeMall";
+import TopSearch from "./TopSearch.js";
 
 export default function Home() {
     return (
@@ -12,6 +13,7 @@ export default function Home() {
             <Category />
             <FlashSale />
             <ShopeeMall />
+            <TopSearch />
         </div>
     );
 }
