@@ -36,6 +36,12 @@
                 border-right: 1px solid rgba(0, 0, 0, 0.05);
                 border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 
+                &:hover {
+                    transform: translateZ(0);
+                    border-color: rgba(0,0,0,.12);
+                    box-shadow: 0 0 0.8125rem 0 rgb(0 0 0 / 5%);
+                }
+
                 .image {
                     width: 84px;
                     height: 88px;

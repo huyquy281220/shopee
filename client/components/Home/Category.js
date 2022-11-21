@@ -2,6 +2,7 @@ import styles from "../../styles/Home/Category.module.scss";
 import images from "../../assets/img";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Category() {
     return (
@@ -18,10 +19,12 @@ export default function Category() {
                         .fill()
                         .map((item, index) => {
                             return (
-                                <div className={styles.item} key={index}>
-                                    <Image src={images.category} alt="category" className={styles.image} />
-                                    <div className={styles.name}>Máy ảnh & máy quay phim</div>
-                                </div>
+                                <Link href="#" key={index}>
+                                    <div className={styles.item}>
+                                        <Image src={images.category} alt="category" className={styles.image} />
+                                        <div className={styles.name}>Máy ảnh & máy quay phim</div>
+                                    </div>
+                                </Link>
                             );
                         })}
                 </div>

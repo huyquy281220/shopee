@@ -56,6 +56,7 @@ const Images = {
     mall_img: require("./mall-img.png").default,
     top_search: require("./top-search.png").default,
     top_search_icon: require("./top-search-icon.png").default,
+    top_search_img: require("./top-search-img.png").default
 };
 
 export default Images;
