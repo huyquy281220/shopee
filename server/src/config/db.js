@@ -7,10 +7,8 @@ async function connect() {
             useUnifiedTopology: true,
         });
         console.log("connect successfully");
-        res.status(200).json("Connection successfully");
     } catch (error) {
         console.log(error);
-        res.status(500).json("Connection failed");
     }
 }
 
