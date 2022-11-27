@@ -23,6 +23,16 @@ class CategoryController {
         }
     }
 
+    //[PATCH] /update
+    async update(req, res, next) {
+        try {
+            const newCategory = await Category.findByIdAndUpdate(req.params?.id, req.body, { new: true });
+            res.status(200).json(newCategory);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     //[DELETE] /delete
     async delete(req, res, next) {
         try {
