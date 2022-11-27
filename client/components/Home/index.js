@@ -6,7 +6,9 @@ import ShopeeMall from "./ShopeeMall";
 import TopSearch from "./TopSearch.js";
 import Suggestion from "./Suggestion.js";
 
-export default function Home() {
+export default function Home({ homeData }) {
+    const { products, categories } = homeData;
+
     return (
         <div>
             <Banner />
@@ -15,7 +17,7 @@ export default function Home() {
             <FlashSale />
             <ShopeeMall />
             <TopSearch />
-            <Suggestion />
+            <Suggestion data={products} />
         </div>
     );
 }
