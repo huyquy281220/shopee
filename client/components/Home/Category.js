@@ -3,8 +3,9 @@ import images from "../../assets/img";
 
 import Image from "next/image";
 import Link from "next/link";
+import {} from "@next/font/google";
 
-export default function Category() {
+export default function Category({ data }) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.simple_banner}>
@@ -15,18 +16,16 @@ export default function Category() {
                     <div>Danh mục</div>
                 </div>
                 <div className={styles.content}>
-                    {Array(20)
-                        .fill()
-                        .map((item, index) => {
-                            return (
-                                <Link href="#" key={index}>
-                                    <div className={styles.item}>
-                                        <Image src={images.category} alt="category" className={styles.image} />
-                                        <div className={styles.name}>Máy ảnh & máy quay phim</div>
-                                    </div>
-                                </Link>
-                            );
-                        })}
+                    {data.map((item, index) => {
+                        return (
+                            <Link href="#" key={index}>
+                                <div className={styles.item}>
+                                    <Image src={images.category} alt="category" className={styles.image} />
+                                    <div className={styles.name}>{item?.name}</div>
+                                </div>
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         </div>

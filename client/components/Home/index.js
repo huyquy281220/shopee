@@ -7,18 +7,19 @@ import TopSearch from "./TopSearch.js";
 import Suggestion from "./Suggestion.js";
 
 export default function Home({ homeData }) {
-    // const { products, categories } = homeData;
+    const { products, categories } = homeData;
 
     return (
         <div>
             <Banner />
             <SubCategory />
-            <Category />
+            <Category data={categories} />
+            {/* <Category /> */}
             <FlashSale />
             <ShopeeMall />
             <TopSearch />
-            {/* <Suggestion data={products} /> */}
-            <Suggestion />
+            <Suggestion data={products} />
+            {/* <Suggestion /> */}
         </div>
     );
 }
