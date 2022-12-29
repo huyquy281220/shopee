@@ -14,8 +14,8 @@ class CategoryController {
     //[POST] /create
     async create(req, res, next) {
         try {
-            const name = req.body?.name;
-            const newCategory = new Category({ name });
+            const reqData = req.body || null;
+            const newCategory = new Category(reqData);
             await newCategory.save();
             res.status(201).json(newCategory);
         } catch (error) {

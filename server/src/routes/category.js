@@ -3,6 +3,6 @@ const CategoryController = require("../controllers/CategoryController");
 
 route.get("/get-all", CategoryController.getAll);
 route.post("/create", CategoryController.create);
-route.delete("/delete", CategoryController.delete);
+route.delete("/delete/:id", CategoryController.delete);
 
 module.exports = route;

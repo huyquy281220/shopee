@@ -5,7 +5,7 @@ const CustomerRoute = require("./auth");
 function routes(app) {
     app.use("/category", CategoryRoute);
     app.use("/product", ProductRoute);
-    app.use("/auth", CustomerRoute);
+    app.use("/user", CustomerRoute);
 }
 
 module.exports = routes;

@@ -1,18 +1,22 @@
 const Customer = require("../models/customer");
 var CryptoJS = require("crypto-js");
+const jwt = require("jsonwebtoken");
+const customer = require("../models/customer");
+const { accessToken, refreshToken } = require("../utils/token");
 
 class CustomerController {
     //[POST] /register
     async register(req, res, next) {
+        const customerData = new Customer({
+            username: req.body?.username,
+            email: req.body?.email,
+            password: CryptoJS.AES.encrypt(req.body?.password, process.env.SALT).toString(),
+        });
         try {
-            const customerData = {
-                email: req.body?.email,
-                password: CryptoJS.AES.encrypt(req.body?.password, process.env.SALT).toString(),
-            };
-            const newCustomer = new Customer(customerData);
-            await newCustomer.save();
+            const newCustomer = await customerData.save();
             res.status(201).json(newCustomer);
         } catch (error) {
+            console.log(error);
             res.status(500).json(error);
         }
     }
@@ -28,13 +32,16 @@ class CustomerController {
             const bytes = CryptoJS.AES.decrypt(customer.password, process.env.SALT);
             const originPassword = bytes.toString(CryptoJS.enc.Utf8);
 
+            const accessTokenAuth = accessToken(customer);
+            const refreshTokenAuth = refreshToken(customer);
+
             if (originPassword !== req.body?.password) {
                 return res.status(401).json("Wrong password");
             }
 
             const { password, ...info } = customer._doc;
 
-            res.status(200).json({ ...info });
+            res.status(200).json({ ...info, accessTokenAuth, refreshTokenAuth });
         } catch (error) {
             res.status(500).json(error);
         }
@@ -43,8 +50,8 @@ class CustomerController {
     //[PATCH] /update
     async update(req, res, next) {
         try {
-            const { password, ...info } = req.body || null;
-            const customerUpdate = await Customer.findByIdAndUpdate(req.params?.id, ...info, { new: true });
+            const reqData = req.body || null;
+            const customerUpdate = await Customer.findByIdAndUpdate(req.params?.id, reqData, { new: true });
             res.status(200).json(customerUpdate);
         } catch (error) {
             res.status(500).json(error);
@@ -58,6 +65,27 @@ class CustomerController {
             res.status(200).json(allCustomer);
         } catch (error) {
             console.log(error);
+            res.status(500).json(error);
+        }
+    }
+
+    //[POST] /refresh
+    async refreshToken(req, res) {
+        try {
+            const OldRefreshToken = req.cookies.refreshTokenAuth;
+            if (!OldRefreshToken) {
+                return res.status(401).json("you're not authenticated");
+            }
+
+            jwt.verify(OldRefreshToken, process.env.SECRET_KEY, (err, user) => {
+                if (err) {
+                    console.log(err);
+                }
+
+                const newAccessToken = accessToken(user);
+                const newRefreshToken = refreshToken(user);
+            });
+        } catch (error) {
             res.status(500).json(error);
         }
     }

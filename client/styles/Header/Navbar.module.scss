@@ -107,12 +107,93 @@
             }
         }
 
+        .user_wrapper {
+            display: flex;
+            position: relative;
+            margin: 0 12px;
+            max-width: 160px;
+            cursor: pointer;
+
+            &:hover > .dropdown {
+                display: flex;
+            }
+
+            .user_avatar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+            }
+
+            .username {
+                margin-left: 8px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                color: var(--white);
+            }
+
+            .dropdown {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 150%;
+                right: 0;
+                width: 150px;
+                border-radius: 2px;
+                background-color: #fff;
+                z-index: 100;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: -20px;
+                    right: 0;
+                    left: 0;
+                    height: 20px;
+                    background-color: transparent;
+                }
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    top: -8px;
+                    right: 30%;
+                    width: 0;
+                    height: 0;
+                    border-left: 14px solid transparent;
+                    border-right: 14px solid transparent;
+                    border-bottom: 10px solid #fff;
+                }
+
+                &_item {
+                    padding: 12px 15px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    border-radius: 2px;
+
+                    &:hover {
+                        background-color: #fafafa;
+                        color: #00bfa5;
+                    }
+                }
+            }
+        }
+
         &_notify {
             display: flex;
             position: relative;
 
-            &:hover .notify_hover {
+            &:hover .notify_popup {
                 display: block;
+            }
+
+            .notify_popup {
+                display: none;
             }
         }
 

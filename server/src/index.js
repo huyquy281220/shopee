@@ -10,7 +10,6 @@ const routes = require("./routes");
 const port = process.env.PORT || 4080;
 
 db.connect();
-
 //user middleware
 app.use(morgan("combined"));
 app.use(cors());

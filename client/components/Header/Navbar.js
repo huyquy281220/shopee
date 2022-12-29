@@ -1,25 +1,28 @@
 import styles from "../../styles/Header/Navbar.module.scss";
 import images from "../../assets/img";
 import NotifyPopover from "./Popover/Notify";
+import { userSelector, logout } from "../../redux/slices/user";
 
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faBell, faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
-import { faChevronDown, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faGlobe, faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
-    const [style, setStyle] = useState({ display: "none" });
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const { userInfo, success } = useSelector(userSelector);
 
-    const handleShowPopover = () =>{
-        setStyle({display: "block"});
-    }
-
-    const handleHidePopover = () =>{
-        setStyle({display: "none"});
-    }
+    const handleLogout = () => {
+        dispatch(logout());
+        if (success === false) {
+            router.push("/");
+        }
+    };
 
     return (
         <nav className={styles.wrapper}>
@@ -56,12 +59,14 @@ export default function Navbar() {
                 </div>
             </div>
             <div className={styles.navbar_right}>
-                <div className={styles.navbar_right_notify} onMouseEnter={handleShowPopover} onMouseLeave={handleHidePopover} >
+                <div className={styles.navbar_right_notify}>
                     <a href="" className={`${styles.navbar_right_item} ${styles.notify_hover}`}>
                         <FontAwesomeIcon icon={faBell} className={styles.navbar_right_icon} />
                         Thông báo
                     </a>
-                    <NotifyPopover notifyStyle={style} />
+                    <div className={styles.notify_popup}>
+                        <NotifyPopover />
+                    </div>
                 </div>
                 <a href="" className={styles.navbar_right_item}>
                     <FontAwesomeIcon icon={faQuestionCircle} className={styles.navbar_right_icon} />
@@ -80,12 +85,32 @@ export default function Navbar() {
                         </a>
                     </div>
                 </div>
-                <Link href="/auth/register" legacyBehavior>
-                    <a className={styles.navbar_right_item}>Đăng ký</a>
-                </Link>
-                <Link href="/auth/login" legacyBehavior>
-                    <a className={styles.navbar_right_item}>Đăng nhập</a>
-                </Link>
+                {success === false ? (
+                    <>
+                        <Link href="/auth/register" legacyBehavior>
+                            <a className={styles.navbar_right_item}>Đăng ký</a>
+                        </Link>
+                        <Link href="/auth/login" legacyBehavior>
+                            <a className={styles.navbar_right_item}>Đăng nhập</a>
+                        </Link>
+                    </>
+                ) : (
+                    <div className={styles.user_wrapper}>
+                        <div className={styles.user_avatar}>{userInfo.profilePic ? userInfo.profilePic : <FontAwesomeIcon icon={faUser} style={{ width: "20px", height: "20px" }} />}</div>
+                        <span className={styles.username}>{userInfo.username}</span>
+                        <div className={styles.dropdown}>
+                            <Link href="#" className={styles.dropdown_item}>
+                                Tài khoản của tôi
+                            </Link>
+                            <Link href="#" className={styles.dropdown_item}>
+                                Đơn mua
+                            </Link>
+                            <Link href="#" className={styles.dropdown_item} onClick={handleLogout}>
+                                Đăng xuất
+                            </Link>
+                        </div>
+                    </div>
+                )}
             </div>
         </nav>
     );

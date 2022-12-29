@@ -11,6 +11,34 @@ class ProductController {
         }
     }
 
+    //[GET] /products
+    async pagination(req, res, next) {
+        const limit = Number(req.query?.limit) || 12;
+        const page = Number(req.query?.page) || 1;
+        try {
+            const products = await Product.find({})
+                .limit(limit)
+                .skip((page - 1) * limit)
+                .exec();
+
+            const count = await Product.count();
+
+            const dataRes = {
+                products,
+                totalPage: Math.ceil(count / limit),
+                count,
+            };
+
+            res.status(200).json({
+                products,
+                totalPage: Math.ceil(count / limit),
+                count,
+            });
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
     //[POST] /create
     async create(req, res, next) {
         try {
@@ -37,6 +65,17 @@ class ProductController {
             const reqData = req.body || null;
             const newProduct = await Product.findByIdAndUpdate(req.params?.id, reqData, { new: true });
             res.status(200).json(newProduct);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
+    //[PUT] /update/all
+    async updateAll(req, res, next) {
+        const dataUpdate = { isFavorite: false };
+        try {
+            const newRecords = await Product.updateMany({}, dataUpdate);
+            res.status(200).json(newRecords);
         } catch (error) {
             res.status(500).json(error);
         }

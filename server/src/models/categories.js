@@ -5,7 +5,7 @@ const CategorySchema = new Schema(
     {
         name: { type: String },
         thumbnail: { type: String, maxLength: 4000 },
-        count: { type: Number, default: 0 },
+        count: { type: Number },
     },
     { timestamps: true }
 );

@@ -21,12 +21,12 @@
         padding: 3px;
         border-radius: 2px;
         background-color: var(--white);
-        box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.09);
-        
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.09);
+
         form {
             display: flex;
             flex: 1;
-            
+
             input {
                 width: 100%;
                 padding: 0 10px;
@@ -55,7 +55,7 @@
     .search_nav {
         display: flex;
         align-items: center;
-        flex:1;
+        flex: 1;
 
         &_item {
             margin: 5px 0 5px 13px;
@@ -67,7 +67,6 @@
             }
         }
     }
-
 }
 .search_cart {
     position: relative;
@@ -76,6 +75,14 @@
     justify-content: center;
     flex: 1;
     max-width: 138px;
+
+    &:hover > .cart_popup {
+        display: block;
+    }
+
+    .cart_popup {
+        display: none;
+    }
 
     &_item {
         color: var(--white);

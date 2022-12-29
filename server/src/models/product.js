@@ -10,10 +10,15 @@ const ProductSchema = new Schema(
         category: [String],
         thumbnail: { type: String, maxLength: 4000 },
         images: [String],
+        variation: {
+            size: [String],
+            color: [String],
+        },
         rating: {
             rate: Number,
             count: Number,
         },
+        isFavorite: { type: Boolean },
     },
     {
         timestamps: true,

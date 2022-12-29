@@ -1,5 +1,6 @@
 import styles from "../../styles/Auth/Auth.module.scss";
 import images from "../../assets/img";
+import EmptyLayout from "../../layouts/EmptyLayout";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -65,9 +66,8 @@ export default function Register() {
                                 </div>
                                 <div className={styles.note}>
                                     <span>
-                                        Bằng việc đăng kí, bạn đã đồng ý với Shopee về <br/>
-                                        <a href="https://shopee.vn/legaldoc/termsOfService/?__classic__=1">Điều khoản sử dụng</a>
-                                        &<a href="https://shopee.vn/legaldoc/privacy/?__classic__=1">Chính sách bảo mật</a>
+                                        Bằng việc đăng kí, bạn đã đồng ý với Shopee về <br />
+                                        <a href="https://shopee.vn/legaldoc/termsOfService/?__classic__=1">Điều khoản sử dụng</a>&<a href="https://shopee.vn/legaldoc/privacy/?__classic__=1">Chính sách bảo mật</a>
                                     </span>
                                 </div>
                             </div>
@@ -84,3 +84,5 @@ export default function Register() {
         </div>
     );
 }
+
+Register.Layout = EmptyLayout;

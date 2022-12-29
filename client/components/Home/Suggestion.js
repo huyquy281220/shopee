@@ -35,7 +35,7 @@ export default function Suggestion({ data }) {
                             </Link>
                         );
                     })}
-                <Link href="/suggestion" legacyBehavior>
+                <Link href="/daily-discover?page=1" legacyBehavior>
                     <a className={styles.show_more}>Xem thêm</a>
                 </Link>
             </div>
