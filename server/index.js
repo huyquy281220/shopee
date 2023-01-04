@@ -18,7 +18,7 @@ app.use(helmet());
 //static file
 app.use(express.static(path.join(__dirname, "resources")));
 app.get("/", (req, res) => {
-    res.sendFile("index.html", { root: path.join(__dirname, "resources") });
+    res.sendFile("index.html", { root: path.join(__dirname, "src/resources") });
 });
 
 // add body-parser
