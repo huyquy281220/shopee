@@ -5,8 +5,8 @@ require("dotenv").config();
 const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
-const db = require("./config/db");
-const routes = require("./routes");
+const db = require("./src/config/db");
+const routes = require("./src/routes");
 const port = process.env.PORT || 4080;
 
 db.connect();
