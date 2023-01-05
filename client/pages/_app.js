@@ -5,22 +5,25 @@ import "swiper/scss/pagination";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import { SessionProvider } from "next-auth/react";
 
 import store from "../redux/store";
 import MainLayout from "../layouts";
 
-function MyApp({ Component, pageProps }) {
-    let persistor = persistStore(store);
+function MyApp({ Component, pageProps, session }) {
+    // let persistor = persistStore(store);
     const Layout = Component.Layout ?? MainLayout;
 
     return (
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
+        <SessionProvider session={session}>
+            <Provider store={store}>
+                {/* <PersistGate loading={null} persistor={persistor}> */}
                 <Layout>
                     <Component {...pageProps} />
                 </Layout>
-            </PersistGate>
-        </Provider>
+                {/* </PersistGate> */}
+            </Provider>
+        </SessionProvider>
     );
 }
 

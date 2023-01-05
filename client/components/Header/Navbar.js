@@ -1,8 +1,9 @@
 import styles from "../../styles/Header/Navbar.module.scss";
 import images from "../../assets/img";
 import NotifyPopover from "./Popover/Notify";
-import { userSelector, logout } from "../../redux/slices/user";
+// import { userSelector, logout } from "../../redux/slices/user";
 
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -15,13 +16,12 @@ import { faChevronDown, faGlobe, faUser } from "@fortawesome/free-solid-svg-icon
 export default function Navbar() {
     const dispatch = useDispatch();
     const router = useRouter();
-    const { userInfo, success } = useSelector(userSelector);
+    // const { userInfo, success } = useSelector(userSelector);
+    const { data: session, status } = useSession();
+    console.log(session);
 
     const handleLogout = () => {
-        dispatch(logout());
-        if (success === false) {
-            router.push("/");
-        }
+        signOut();
     };
 
     return (
@@ -85,19 +85,10 @@ export default function Navbar() {
                         </a>
                     </div>
                 </div>
-                {success === false ? (
-                    <>
-                        <Link href="/auth/register" legacyBehavior>
-                            <a className={styles.navbar_right_item}>Đăng ký</a>
-                        </Link>
-                        <Link href="/auth/login" legacyBehavior>
-                            <a className={styles.navbar_right_item}>Đăng nhập</a>
-                        </Link>
-                    </>
-                ) : (
+                {session?.user ? (
                     <div className={styles.user_wrapper}>
-                        <div className={styles.user_avatar}>{userInfo.profilePic ? userInfo.profilePic : <FontAwesomeIcon icon={faUser} style={{ width: "20px", height: "20px" }} />}</div>
-                        <span className={styles.username}>{userInfo.username}</span>
+                        <div className={styles.user_avatar}>{<img src={session.user.image} alt="logo" width={20} height={20} /> || <FontAwesomeIcon icon={faUser} style={{ width: "20px", height: "20px" }} />}</div>
+                        <span className={styles.username}>{session.user.name}</span>
                         <div className={styles.dropdown}>
                             <Link href="#" className={styles.dropdown_item}>
                                 Tài khoản của tôi
@@ -110,6 +101,15 @@ export default function Navbar() {
                             </Link>
                         </div>
                     </div>
+                ) : (
+                    <>
+                        <Link href="/auth/register" legacyBehavior>
+                            <a className={styles.navbar_right_item}>Đăng ký</a>
+                        </Link>
+                        <Link href="/auth/login" legacyBehavior>
+                            <a className={styles.navbar_right_item}>Đăng nhập</a>
+                        </Link>
+                    </>
                 )}
             </div>
         </nav>

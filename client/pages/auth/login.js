@@ -3,6 +3,7 @@ import images from "../../assets/img";
 import { userSelector, login } from "../../redux/slices/user";
 import EmptyLayout from "../../layouts/EmptyLayout";
 
+import { signIn } from "next-auth/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -29,6 +30,14 @@ export default function Login() {
         if (success === true) {
             router.push("/");
         }
+    };
+
+    const handleGgLogin = () => {
+        signIn("google");
+    };
+
+    const handleFbLogin = () => {
+        signIn("facebook");
     };
 
     return (
@@ -76,11 +85,11 @@ export default function Login() {
                                     <div className={styles.line}></div>
                                 </div>
                                 <div className={styles.social_login_bottom}>
-                                    <a href="#" className={styles.social_link}>
+                                    <a href="#" className={styles.social_link} onClick={handleFbLogin}>
                                         <Image src={images.logo_fb} alt="logo" className={styles.social_logo} />
                                         <span>Facebook</span>
                                     </a>
-                                    <a href="#" className={styles.social_link}>
+                                    <a href="#" className={styles.social_link} onClick={handleGgLogin}>
                                         <Image src={images.logo_gg} alt="logo" className={styles.social_logo} />
                                         <span>Google</span>
                                     </a>

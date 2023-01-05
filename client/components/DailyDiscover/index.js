@@ -21,8 +21,10 @@ const fetcher = async (url) => {
 };
 
 export default function DiscoverPage(props) {
+    const apiUrl = process.env.NEXT_PUBLIC_API || "http://localhost:4000";
+
     const [pageIndex, setPageIndex] = useState(1);
-    const { data, error, isLoading } = useSWR(`http://localhost:4000/product/products?page=${pageIndex}`, fetcher);
+    const { data, error, isLoading } = useSWR(`${apiUrl}/product/products?page=${pageIndex}`, fetcher);
     const router = useRouter();
     useEffect(() => {
         router.replace(
@@ -36,8 +38,8 @@ export default function DiscoverPage(props) {
         );
     }, [pageIndex]);
 
-    if (isLoading) return <div style={{ textAlign: "center", color: "#ee4d2d" }}>Loading....</div>;
-    if (!data) return <div style={{ textAlign: "center" }}>No product data</div>;
+    // if (isLoading) return <div style={{ textAlign: "center", color: "#ee4d2d" }}>Loading....</div>;
+    // if (!data) return <div style={{ textAlign: "center" }}>No product data</div>;
 
     const listProduct = data.data.products;
     const totalPage = data.data.totalPage;
