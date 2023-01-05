@@ -38,8 +38,8 @@ export default function DiscoverPage(props) {
         );
     }, [pageIndex]);
 
-    // if (isLoading) return <div style={{ textAlign: "center", color: "#ee4d2d" }}>Loading....</div>;
-    // if (!data) return <div style={{ textAlign: "center" }}>No product data</div>;
+    if (isLoading) return <div style={{ textAlign: "center", color: "#ee4d2d" }}>Loading....</div>;
+    if (!data) return <div style={{ textAlign: "center" }}>No product data</div>;
 
     const listProduct = data.data.products;
     const totalPage = data.data.totalPage;
@@ -66,8 +66,6 @@ export default function DiscoverPage(props) {
         }
     };
 
-    console.log("daily");
-
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
@@ -91,7 +89,7 @@ export default function DiscoverPage(props) {
                                             <span className={styles.text}>giảm</span>
                                         </div>
                                         <div className={styles.item_header}>
-                                            <Image src={images.top_search_img} alt="img" className={styles.image} />
+                                            <Image src={item.thumbnail} alt="img" width={190} height={190} className={styles.image} />
                                         </div>
                                         <div className={styles.desc}>{item.description}</div>
                                         <div className={styles.sale}></div>
