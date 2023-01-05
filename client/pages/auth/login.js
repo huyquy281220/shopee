@@ -85,18 +85,18 @@ export default function Login() {
                                     <div className={styles.line}></div>
                                 </div>
                                 <div className={styles.social_login_bottom}>
-                                    <a href="#" className={styles.social_link} onClick={handleFbLogin}>
+                                    <button href="#" className={styles.social_link} onClick={handleFbLogin}>
                                         <Image src={images.logo_fb} alt="logo" className={styles.social_logo} />
                                         <span>Facebook</span>
-                                    </a>
-                                    <a href="#" className={styles.social_link} onClick={handleGgLogin}>
+                                    </button>
+                                    <button href="#" className={styles.social_link} onClick={handleGgLogin}>
                                         <Image src={images.logo_gg} alt="logo" className={styles.social_logo} />
                                         <span>Google</span>
-                                    </a>
-                                    <a href="#" className={styles.social_link}>
+                                    </button>
+                                    <button href="#" className={styles.social_link}>
                                         <Image src={images.logo_apple} alt="logo" className={styles.social_logo} />
                                         <span>Apple</span>
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
