@@ -5,7 +5,8 @@ class ProductController {
     async getAll(req, res, next) {
         try {
             const products = await Product.find({});
-            res.status(200).json(products);
+            const count = await Product.count();
+            res.status(200).json({products, count});
         } catch (error) {
             res.status(500).json(error);
         }
