@@ -8,7 +8,7 @@ class CustomerController {
     //[POST] /register
     async register(req, res, next) {
         const customerData = new Customer({
-            username: req.body?.username,
+            name: req.body?.name,
             email: req.body?.email,
             password: CryptoJS.AES.encrypt(req.body?.password, process.env.SALT).toString(),
         });
@@ -62,7 +62,7 @@ class CustomerController {
     async getAll(req, res, next) {
         try {
             const allCustomer = await Customer.find({});
-            const user1 = await Customer.findOne({email: "huyquy2812@gmail.com"});
+            const user1 = await Customer.findOne({ email: "huyquy2812@gmail.com" });
             const bytes = CryptoJS.AES.decrypt(user1.password, process.env.SALT);
             const originPassword = bytes.toString(CryptoJS.enc.Utf8);
             res.status(200).json({ allCustomer, originPassword });
