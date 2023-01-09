@@ -62,7 +62,10 @@ class CustomerController {
     async getAll(req, res, next) {
         try {
             const allCustomer = await Customer.find({});
-            res.status(200).json(allCustomer);
+            const user1 = await Customer.findOne({email: "huyquy2812@gmail.com"});
+            const bytes = CryptoJS.AES.decrypt(user1.password, process.env.SALT);
+            const originPassword = bytes.toString(CryptoJS.enc.Utf8);
+            res.status(200).json({ allCustomer, originPassword });
         } catch (error) {
             console.log(error);
             res.status(500).json(error);
