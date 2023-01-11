@@ -20,6 +20,15 @@ a {
   text-decoration: none;
 }
 
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #EE4D2D !important;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

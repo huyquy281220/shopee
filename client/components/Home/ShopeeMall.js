@@ -1,6 +1,8 @@
 import styles from "../../styles/Home/ShopeeMall.module.scss";
 import images from "../../assets/img";
+import SwiperBlackButtons from "../common/SwiperBlackButtons";
 
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +11,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 
 export default function ShopeeMall() {
+    const swiperRef = useRef(null);
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.simple_banner}>
@@ -44,7 +48,7 @@ export default function ShopeeMall() {
                 </div>
                 <div className={styles.content}>
                     <div className={styles.content_left}>
-                        <Swiper modules={[Navigation, Pagination, Autoplay]} slidesPerView={1} autoplay={{delay:5000}} loop navigation pagination={{ clickable: true }} className={styles.swiper_wrapper}>
+                        <Swiper modules={[Navigation, Pagination, Autoplay]} ref={swiperRef} navigation={{ prevEl: ".cus_prev", nextEl: ".cus_next" }} slidesPerView={1} autoplay={{ delay: 5000 }} loop pagination={{ clickable: true }} className={styles.swiper_wrapper}>
                             {images.mall_banners.map((item, index) => {
                                 return (
                                     <SwiperSlide key={index}>
@@ -54,6 +58,9 @@ export default function ShopeeMall() {
                                     </SwiperSlide>
                                 );
                             })}
+                            <div className={styles.btn_wrapper}>
+                                <SwiperBlackButtons swiperRef={swiperRef} />
+                            </div>
                         </Swiper>
                     </div>
                     <div className={styles.content_right}>

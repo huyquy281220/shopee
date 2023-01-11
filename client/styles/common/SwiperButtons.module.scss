@@ -1,0 +1,14 @@
+.cus_prev,
+.cus_next {
+    width: 35px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.18);
+    border: 0;
+    font-size: 20px;
+    color: var(--white);
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.32);
+    }
+}

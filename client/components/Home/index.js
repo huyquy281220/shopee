@@ -8,7 +8,6 @@ import Suggestion from "./Suggestion.js";
 
 export default function Home({ homeData }) {
     // const { products, categories } = homeData;
-    console.log("home");
 
     return (
         <div>

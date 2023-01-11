@@ -1,3 +1,5 @@
+@import "../mixins";
+
 .wrapper {
     background-color: #f5f5f5;
 
@@ -30,7 +32,7 @@
                     text-transform: uppercase;
                     color: #d0011b;
                 }
-    
+
                 .items {
                     display: flex;
                     margin-left: 15px;
@@ -39,7 +41,7 @@
                         display: flex;
                         align-items: center;
                         margin-right: 8px;
-    
+
                         .icon {
                             margin: 0 5px;
                             width: 18px;
@@ -67,13 +69,22 @@
                 height: 470px;
                 padding: 10px 10px 0;
                 background-color: var(--white);
-                
+
                 .swiper_wrapper {
                     height: 100%;
+                    
+                    .btn_wrapper {
+                        @include btn-wrapper;
+                    }
+
+                    &:hover .btn_wrapper {
+                        opacity: 1;
+                        transition: opacity 0.5s linear;
+                    }
                 }
             }
-            
-            &_right{
+
+            &_right {
                 width: 800px;
                 padding: 10px 10px 0;
                 background-color: var(--white);
@@ -90,7 +101,7 @@
 
                         a {
                             display: block;
-    
+
                             .desc {
                                 text-align: center;
                                 font-size: 18px;

@@ -8,7 +8,6 @@ export const authOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     providers: [
         GoogleProvider({
-            name: "Google",
             clientId: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
         }),
@@ -17,25 +16,37 @@ export const authOptions = {
             clientSecret: process.env.FACEBOOK_SECRET,
         }),
         CredentialsProvider({
+            id: "credentials",
             name: "Credentials",
-            async authorise(credentials) {
+            async authorize(credentials) {
                 try {
-                    const user = await axios.post("http://localhost:4000/auth/login", { email: credentials.email, password: credentials.password });
-                    if (user.data) {
+                    const user = await axios.post("https://shopee-api.vercel.app/user/login", { email: credentials.email, password: credentials.password });
+                    if (user) {
                         return user.data;
                     } else {
                         return null;
                     }
                 } catch (error) {
-                    throw new Error(error);
+                    throw new Error(error.response.data);
                 }
             },
         }),
     ],
+    pages: {
+        error: "/auth/login",
+        signIn: "/auth/login",
+    },
     callbacks: {
         async redirect({ url, baseUrl }) {
             return baseUrl;
         },
+
+        // async jwt(token, user) {
+        //     if (user) {
+        //         token.accessToken = user.accessTokenAuth;
+        //     }
+        //     return token;
+        // },
     },
 };
 

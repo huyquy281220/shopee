@@ -10,3 +10,15 @@
         }
     }
 }
+
+@mixin btn-wrapper {
+    opacity: 0;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    transition: opacity 0.2s linear;
+}

@@ -3,9 +3,9 @@ import images from "../../assets/img";
 import { userSelector, login } from "../../redux/slices/user";
 import EmptyLayout from "../../layouts/EmptyLayout";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,23 +14,32 @@ import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
     const router = useRouter();
+    const { data: session } = useSession();
     const [isToggle, setIsToggle] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [errorMessage,setErrorMessage] = useState("");
+    const emailRef = useRef("");
+    const passwordRef = useRef("");
 
-    const dispatch = useDispatch();
-    const { success } = useSelector(userSelector);
+    // const dispatch = useDispatch();
+    // const { success } = useSelector(userSelector);
 
     const hanldeTogglePassword = () => {
         setIsToggle(!isToggle);
     };
 
     const handleLogin = async () => {
-        dispatch(login({ email, password }));
-        if (success === true) {
-            router.push("/");
-        }
+        // dispatch(login({ email, password }));
+        // if (success === true) {
+        //     router.push("/");
+        // }
+        signIn("credentials", {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+            redirect: false,
+        }).then((err) => setErrorMessage(err.error));
     };
+
+    console.log(session);
 
     const handleGgLogin = () => {
         signIn("google");
@@ -63,12 +72,13 @@ export default function Login() {
                         </div>
                         <div className={styles.form_content}>
                             <div className={styles.email}>
-                                <input type="email" name="email" value={email} placeholder="Email/Số điện thoại/Tên đăng nhập" autoComplete="on" maxLength={128} onChange={(e) => setEmail(e.target.value)} />
+                                <input type="email" name="email" ref={emailRef} placeholder="Email/Số điện thoại/Tên đăng nhập" autoComplete="on" maxLength={128} />
                             </div>
                             <div className={styles.password}>
-                                <input type={isToggle ? "text" : "password"} value={password} name="password" placeholder="Mật khẩu" onChange={(e) => setPassword(e.target.value)} />
+                                <input type={isToggle ? "text" : "password"} ref={passwordRef} name="password" placeholder="Mật khẩu" />
                                 <FontAwesomeIcon icon={isToggle ? faEyeSlash : faEye} className={styles.eye} onClick={hanldeTogglePassword} />
                             </div>
+                            <p className={styles.error}>{errorMessage}</p>
                             <button className={styles.btn_login} onClick={handleLogin}>
                                 Đăng nhập
                             </button>
