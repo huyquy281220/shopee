@@ -1,6 +1,7 @@
 import styles from "../../styles/Home/ShopeeMall.module.scss";
 import images from "../../assets/img";
 import SwiperBlackButtons from "../common/SwiperBlackButtons";
+import SwiperWhiteButtons from "../common/SwiperWhiteButtons";
 
 import { useRef } from "react";
 import Image from "next/image";
@@ -11,7 +12,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 
 export default function ShopeeMall() {
-    const swiperRef = useRef(null);
+    const bannerSwiperRef = useRef(null);
+    const itemSwiperRef = useRef(null);
 
     return (
         <div className={styles.wrapper}>
@@ -48,7 +50,7 @@ export default function ShopeeMall() {
                 </div>
                 <div className={styles.content}>
                     <div className={styles.content_left}>
-                        <Swiper modules={[Navigation, Pagination, Autoplay]} ref={swiperRef} navigation={{ prevEl: ".cus_prev", nextEl: ".cus_next" }} slidesPerView={1} autoplay={{ delay: 5000 }} loop pagination={{ clickable: true }} className={styles.swiper_wrapper}>
+                        <Swiper modules={[Navigation, Pagination, Autoplay]} ref={bannerSwiperRef} navigation={{ prevEl: ".cus_prev", nextEl: ".cus_next" }} slidesPerView={1} autoplay={{ delay: 5000 }} loop pagination={{ clickable: true }} className={styles.swiper_wrapper}>
                             {images.mall_banners.map((item, index) => {
                                 return (
                                     <SwiperSlide key={index}>
@@ -58,13 +60,13 @@ export default function ShopeeMall() {
                                     </SwiperSlide>
                                 );
                             })}
-                            <div className={styles.btn_wrapper}>
-                                <SwiperBlackButtons swiperRef={swiperRef} />
+                            <div className={styles.btn_left_wrapper}>
+                                <SwiperBlackButtons swiperRef={bannerSwiperRef} />
                             </div>
                         </Swiper>
                     </div>
                     <div className={styles.content_right}>
-                        <Swiper modules={[Navigation]} navigation slidesPerView={4} slidesPerGroup={4} spaceBetween={20} allowTouchMove={false} className={styles.swiper_wrapper}>
+                        <Swiper modules={[Navigation]} ref={itemSwiperRef} navigation={{ prevEl: ".cus_prev", nextEl: ".cus_next" }} slidesPerView={4} slidesPerGroup={4} spaceBetween={20} allowTouchMove={false} className={styles.swiper_wrapper}>
                             <SwiperSlide className={styles.swiper_item}>
                                 <Link href="#">
                                     <Image src={images.mall_img} alt="img" />
@@ -126,6 +128,9 @@ export default function ShopeeMall() {
                                 </Link>
                             </SwiperSlide>
                         </Swiper>
+                        <div className={styles.btn_right_wrapper}>
+                            <SwiperWhiteButtons swiperRef={itemSwiperRef} />
+                        </div>
                     </div>
                 </div>
             </div>

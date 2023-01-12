@@ -1,9 +1,9 @@
-import styles from "../../styles/common/SwiperBlackButtons.module.scss";
+import styles from "../../styles/common/SwiperWhiteButtons.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-export default function SwiperButtons(props) {
+export default function SwiperWhiteButtons(props) {
     const { swiperRef } = props;
 
     const handlePrev = () => {

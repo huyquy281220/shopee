@@ -16,7 +16,7 @@ export default function Login() {
     const router = useRouter();
     const { data: session } = useSession();
     const [isToggle, setIsToggle] = useState(false);
-    const [errorMessage,setErrorMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const emailRef = useRef("");
     const passwordRef = useRef("");
 
@@ -39,7 +39,9 @@ export default function Login() {
         }).then((err) => setErrorMessage(err.error));
     };
 
-    console.log(session);
+    const handleInputChange = () => {
+        setErrorMessage("");
+    };
 
     const handleGgLogin = () => {
         signIn("google");
@@ -72,10 +74,10 @@ export default function Login() {
                         </div>
                         <div className={styles.form_content}>
                             <div className={styles.email}>
-                                <input type="email" name="email" ref={emailRef} placeholder="Email/Số điện thoại/Tên đăng nhập" autoComplete="on" maxLength={128} />
+                                <input type="email" name="email" ref={emailRef} onChange={handleInputChange} placeholder="Email/Số điện thoại/Tên đăng nhập" autoComplete="on" maxLength={128} />
                             </div>
                             <div className={styles.password}>
-                                <input type={isToggle ? "text" : "password"} ref={passwordRef} name="password" placeholder="Mật khẩu" />
+                                <input type={isToggle ? "text" : "password"} ref={passwordRef} onChange={handleInputChange} name="password" placeholder="Mật khẩu" />
                                 <FontAwesomeIcon icon={isToggle ? faEyeSlash : faEye} className={styles.eye} onClick={hanldeTogglePassword} />
                             </div>
                             <p className={styles.error}>{errorMessage}</p>

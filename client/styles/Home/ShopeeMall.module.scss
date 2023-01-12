@@ -72,12 +72,12 @@
 
                 .swiper_wrapper {
                     height: 100%;
-                    
-                    .btn_wrapper {
+
+                    .btn_left_wrapper {
                         @include btn-wrapper;
                     }
 
-                    &:hover .btn_wrapper {
+                    &:hover .btn_left_wrapper {
                         opacity: 1;
                         transition: opacity 0.5s linear;
                     }
@@ -85,13 +85,20 @@
             }
 
             &_right {
+                position: relative;
                 width: 800px;
-                padding: 10px 10px 0;
+                padding: 10px 0 0 10px;
                 background-color: var(--white);
 
+                .btn_right_wrapper {
+                    @include btn-wrapper;
+
+                    opacity: 1;
+                }
                 .swiper_wrapper {
                     height: 100%;
                     text-align: center;
+
 
                     .swiper_item {
                         display: flex;

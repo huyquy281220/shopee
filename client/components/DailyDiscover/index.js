@@ -21,7 +21,7 @@ const fetcher = async (url) => {
 };
 
 export default function DiscoverPage(props) {
-    const apiUrl = process.env.NEXT_PUBLIC_API || "http://localhost:4000";
+    const apiUrl = process.env.NEXT_PUBLIC_API;
 
     const [pageIndex, setPageIndex] = useState(1);
     const { data, error, isLoading } = useSWR(`${apiUrl}/product/products?page=${pageIndex}`, fetcher);
@@ -77,7 +77,13 @@ export default function DiscoverPage(props) {
                     {listProduct.length > 0 &&
                         listProduct.map((item, index) => {
                             return (
-                                <Link href="#" key={index}>
+                                <Link
+                                    href={{
+                                        pathname: "/some-page",
+                                        query: item._id,
+                                    }}
+                                    key={index}
+                                >
                                     <div className={styles.item}>
                                         {item.isFavorite && (
                                             <div className={styles.item_favourite}>

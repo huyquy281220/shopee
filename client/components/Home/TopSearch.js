@@ -1,6 +1,8 @@
 import styles from "../../styles/Home/TopSearch.module.scss";
 import images from "../../assets/img";
+import SwiperWhiteButtons from "../common/SwiperWhiteButtons";
 
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function TopSearch() {
+    const swiperRef = useRef(null);
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.top_search}>
@@ -22,7 +26,7 @@ export default function TopSearch() {
                     </Link>
                 </div>
                 <div className={styles.content}>
-                    <Swiper modules={[Navigation]} navigation slidesPerView={6} slidesPerGroup={6} allowTouchMove={false} className={styles.swiper_wrapper}>
+                    <Swiper modules={[Navigation]} ref={swiperRef} navigation={{ prevEl: ".cus_prev", nextEl: ".cus_next" }} slidesPerView={6} slidesPerGroup={6} allowTouchMove={false} className={styles.swiper_wrapper}>
                         {Array(12)
                             .fill()
                             .map((item, index) => {
@@ -42,6 +46,9 @@ export default function TopSearch() {
                                 );
                             })}
                     </Swiper>
+                    <div className={styles.btn_wrapper}>
+                        <SwiperWhiteButtons swiperRef={swiperRef} />
+                    </div>
                 </div>
             </div>
         </div>
