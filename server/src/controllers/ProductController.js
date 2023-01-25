@@ -1,14 +1,27 @@
+const product = require("../models/product");
 const Product = require("../models/product");
 
 class ProductController {
     //[GET] /get-all
     async getAll(req, res, next) {
         try {
-            const products = await Product.find({});
+            const limit = Number(req.query?.limit) || null;
+            const products = await Product.find({}).limit(limit);
             const count = await Product.count();
-            res.status(200).json({products, count});
+            res.status(200).json({ products, count });
         } catch (error) {
             res.status(500).json(error);
+        }
+    }
+
+    //[GET] /:id
+    async getById(req, res, next) {
+        try {
+            const id = req.params?.id;
+            const product = await Product.findById(id);
+            res.status(200).json(product);
+        } catch (error) {
+            console.log(error);
         }
     }
 

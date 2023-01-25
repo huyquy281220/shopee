@@ -7,5 +7,6 @@ route.post("/create", ProductController.create);
 route.delete("/delete/:id", ProductController.delete);
 route.patch("/update/:id", ProductController.update);
 route.put("/update/all", ProductController.updateAll);
+route.get("/:id", ProductController.getById);
 
 module.exports = route;
