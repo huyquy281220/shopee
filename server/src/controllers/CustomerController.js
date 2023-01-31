@@ -1,4 +1,5 @@
 const Customer = require("../models/customer");
+const Cart = require("../models/cart");
 var CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const customer = require("../models/customer");
@@ -7,17 +8,19 @@ const { accessToken, refreshToken } = require("../utils/token");
 class CustomerController {
     //[POST] /register
     async register(req, res, next) {
-        const customerData = new Customer({
-            name: req.body?.name,
-            email: req.body?.email,
-            password: CryptoJS.AES.encrypt(req.body?.password, process.env.SALT).toString(),
-        });
         try {
+            const customerData = new Customer({
+                name: req.body?.name || "user123",
+                email: req.body?.email,
+                password: CryptoJS.AES.encrypt(req.body?.password, process.env.SALT).toString(),
+            });
             const newCustomer = await customerData.save();
-            res.status(201).json(newCustomer);
+            const newCart = new Cart({ user: customerData._id });
+            await newCart.save();
+            return res.status(201).json(newCustomer);
         } catch (error) {
             console.log(error);
-            res.status(500).json(error);
+            return res.status(500).json(error);
         }
     }
 

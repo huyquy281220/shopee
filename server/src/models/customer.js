@@ -14,6 +14,7 @@ const CustomerSchema = new Schema(
             city: String,
             street: String,
         },
+        cart: { type: Schema.Types.ObjectId, ref: "Cart" },
         image: { type: String, maxLength: 4000 },
     },
     {
