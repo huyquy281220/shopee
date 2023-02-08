@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const CartSchema = new Schema(
     {
-        products: { type: Array, default: ["1", "2"] },
+        products: { type: Array, default: [] },
         user: { type: Schema.Types.ObjectId, ref: "Customers" },
     },
     { timestamps: true }

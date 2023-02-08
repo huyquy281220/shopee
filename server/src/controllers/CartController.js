@@ -1,11 +1,11 @@
 const Cart = require("../models/cart");
+const Customer = require("../models/customer");
 
 class CartController {
     //GET /get-all
     async getAll(req, res, next) {
         try {
             const carts = await Cart.find({});
-
             res.status(200).json(carts);
         } catch (error) {
             console.log(error);
@@ -17,13 +17,16 @@ class CartController {
         try {
             const email = req.body?.email;
             const cartClient = req.body?.cart;
-            const cart = await Cart.findOne().populate({ path: "user", match: { user: email } });
+            // query customer
+            const customer = await Customer.findOne({ email });
+            //query cart
+            const cart = await Cart.findOne({ user: customer._id }).populate({ path: "user" });
             if (JSON.stringify(cartClient) === JSON.stringify(cart.products)) {
                 return res.status(200).json(cart);
+            } else {
+                const newCart = await Cart.findOneAndUpdate({ user: customer._id }, { products: cartClient }, { new: true }).populate({ path: "user", match: { user: "xaolozcongtu3@gmail.com" } });
+                return res.status(200).json(newCart);
             }
-            const newCart = await Cart.findOneAndUpdate({}, { products: cartClient }, { new: true }).populate({ path: "user", match: { user: email } });
-            console.log(newCart);
-            return res.status(200).json(newCart);
         } catch (error) {
             console.log(error);
         }

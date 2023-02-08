@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema(
     {
-        name: { type: String, trim: true },
+        name: { type: String, trim: true},
         description: { type: String, trim: true },
         quantity: { type: Number },
         price: { type: Number },
@@ -19,6 +19,7 @@ const ProductSchema = new Schema(
             count: Number,
         },
         isFavorite: { type: Boolean },
+        selected: { type: Number },
     },
     {
         timestamps: true,

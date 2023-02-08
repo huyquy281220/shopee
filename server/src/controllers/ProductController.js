@@ -86,7 +86,7 @@ class ProductController {
 
     //[PUT] /update/all
     async updateAll(req, res, next) {
-        const dataUpdate = { isFavorite: false };
+        const dataUpdate = { selected: 1 };
         try {
             const newRecords = await Product.updateMany({}, dataUpdate);
             res.status(200).json(newRecords);
