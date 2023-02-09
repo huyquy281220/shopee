@@ -1,10 +1,8 @@
 import styles from "../../styles/Auth/Auth.module.scss";
 import images from "../../assets/img";
-import { userSelector, login } from "../../redux/slices/user";
 import EmptyLayout from "../../layouts/EmptyLayout";
 
 import { signIn, useSession } from "next-auth/react";
-import { useSelector, useDispatch } from "react-redux";
 import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -20,23 +18,16 @@ export default function Login() {
     const emailRef = useRef("");
     const passwordRef = useRef("");
 
-    // const dispatch = useDispatch();
-    // const { success } = useSelector(userSelector);
-
     const hanldeTogglePassword = () => {
         setIsToggle(!isToggle);
     };
 
     const handleLogin = async () => {
-        // dispatch(login({ email, password }));
-        // if (success === true) {
-        //     router.push("/");
-        // }
         signIn("credentials", {
             email: emailRef.current.value,
             password: passwordRef.current.value,
-            redirect: false,
-        }).then((err) => setErrorMessage(err.error));
+            redirect: true,
+        });
     };
 
     const handleInputChange = () => {
@@ -67,7 +58,6 @@ export default function Login() {
             <div className={styles.container}>
                 <div className={styles.content}>
                     <div></div>
-                    {/* <form> */}
                     <div className={styles.form}>
                         <div className={styles.form_header}>
                             <p>Đăng nhập</p>
@@ -119,7 +109,6 @@ export default function Login() {
                             </Link>
                         </div>
                     </div>
-                    {/* </form> */}
                 </div>
             </div>
         </div>

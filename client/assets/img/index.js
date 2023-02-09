@@ -58,6 +58,9 @@ const Images = {
     top_search_icon: require("./top-search-icon.png").default,
     top_search_img: require("./top-search-img.png").default,
     fb_mess: require("./facebook-messenger.svg").default,
+    transport_icon: require("./transport-icon.png").default,
+    free_ship_2: require("./2-2-free-ship.png").default,
+    seven: require("./seven.png").default,
 };
 
 export default Images;

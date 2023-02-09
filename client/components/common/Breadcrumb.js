@@ -16,7 +16,7 @@ export default function Breadcrumbs(props) {
                     listBreadcrumbs.map((item, index) => {
                         return (
                             <li className={styles.item} key={item}>
-                                <Link href={`/${item}`} className={item === query.slug ? styles.name_active : styles.name}>
+                                <Link href="/" className={styles.name}>
                                     {item}
                                 </Link>
                                 <FontAwesomeIcon icon={faChevronRight} className={styles.icon} />

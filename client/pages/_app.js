@@ -9,19 +9,20 @@ import { SessionProvider } from "next-auth/react";
 
 import store from "../redux/store";
 import MainLayout from "../layouts";
+import Loading from "../components/common/Loading";
 
 function MyApp({ Component, pageProps, session }) {
-    // let persistor = persistStore(store);
+    let persistor = persistStore(store);
     const Layout = Component.Layout ?? MainLayout;
 
     return (
         <SessionProvider session={session}>
             <Provider store={store}>
-                {/* <PersistGate loading={null} persistor={persistor}> */}
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-                {/* </PersistGate> */}
+                <PersistGate loading={<Loading />} persistor={persistor}>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </PersistGate>
             </Provider>
         </SessionProvider>
     );

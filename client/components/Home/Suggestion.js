@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Suggestion({ data }) {
-    const products = data || Array(12).fill();
+    const products = data.products || Array(12).fill();
 
     return (
         <div className={styles.wrapper}>
@@ -19,10 +19,13 @@ export default function Suggestion({ data }) {
                 {products?.length > 0 &&
                     products.map((item, index) => {
                         return (
-                            <Link href="#" key={index}>
+                            <Link href={{ pathname: `/products/${item._id}`, query: { name: item.name } }} key={index}>
                                 <div className={styles.item}>
+                                    <div className={styles.item_favourite}>
+                                        <span>Yêu thích</span>
+                                    </div>
                                     <div className={styles.item_header}>
-                                        <Image src={images.top_search_img} alt="img" className={styles.image} />
+                                        <Image src={item.thumbnail} alt="img" width={178} height={190} className={styles.image} />
                                     </div>
                                     <div className={styles.desc}>{item?.description}</div>
                                     <div className={styles.sale}></div>

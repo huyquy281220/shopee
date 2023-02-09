@@ -2,17 +2,36 @@ import styles from "../../styles/Auth/Auth.module.scss";
 import images from "../../assets/img";
 import EmptyLayout from "../../layouts/EmptyLayout";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
+    const router = useRouter();
     const [isToggle, setIsToggle] = useState(false);
+    const emailRef = useRef("");
+    const pwdRef = useRef("");
 
     const hanldeTogglePassword = () => {
         setIsToggle(!isToggle);
+    };
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+
+        try {
+            await axios.post(`${process.env.NEXT_PUBLIC_API}/user/register`, {
+                email: emailRef.current.value,
+                password: pwdRef.current.value,
+            });
+            router.push("/auth/login");
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -31,20 +50,21 @@ export default function Register() {
             <div className={styles.container}>
                 <div className={styles.content}>
                     <div></div>
-                    <form action="">
-                        <div className={styles.form}>
+                    <div className={styles.form}>
+                        <form onSubmit={(e) => handleSignUp(e)}>
                             <div className={styles.form_header}>
                                 <p>Đăng ký</p>
                             </div>
                             <div className={styles.form_content}>
                                 <div className={styles.email}>
-                                    <input type="email" placeholder="Email/Số điện thoại/Tên đăng nhập" autoComplete="on" maxLength={128} />
+                                    <input type="email" ref={emailRef} placeholder="Email/Số điện thoại/Tên đăng nhập" autoComplete="on" maxLength={128} required />
                                 </div>
                                 <div className={styles.password}>
-                                    <input type={isToggle ? "text" : "password"} placeholder="Mật khẩu" maxLength={128} />
+                                    <input type={isToggle ? "text" : "password"} ref={pwdRef} placeholder="Mật khẩu" maxLength={128} required />
                                     <FontAwesomeIcon icon={isToggle ? faEyeSlash : faEye} className={styles.eye} onClick={hanldeTogglePassword} />
                                 </div>
-                                <button className={styles.btn_register} disabled>
+                                <p className={styles.error}></p>
+                                <button type="submit" className={styles.btn_register}>
                                     Đăng ký
                                 </button>
                                 <div className={styles.social_login}>
@@ -77,8 +97,8 @@ export default function Register() {
                                     <a className={styles.form_footer_link}>Đăng nhập</a>
                                 </Link>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,14 +1,13 @@
-import { withAuth } from "next-auth/middleware";
+import { NextResponse, NextRequest } from "next/server";
+import { getSession } from "next-auth/react";
 
-// export { default } from "next-auth/middleware";
+export async function middleware(NextRequest) {
+    // const session = await getSession({ NextRequest });
+    // const url = NextRequest.nextUrl.clone();
+    // if (!session) {
+    //     url.pathName = "/auth/login";
+    //     return NextResponse.redirect(url);
+    // }
 
-export const config = { matcher: ["/products"] };
-
-
-export default withAuth({
-    matcher: ["/products"],
-    pages: {
-        signIn: "/auth/login",
-        signUp: "/auth/register",
-    }
-});
+    // return NextResponse.next();
+}

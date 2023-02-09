@@ -2,29 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import useSWR from "swr";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
+import { useFetch } from "../../hooks/useFetch";
 import styles from "./DailyDiscover.module.scss";
 import images from "../../assets/img";
 import { NumberWithCommas as fPrice } from "../../utils/formatPrice";
-
-const fetcher = async (url) => {
-    try {
-        const productData = await axios.get(url);
-        return productData;
-    } catch (error) {
-        console.log(error);
-    }
-};
+import Loading from "../common/Loading";
 
 export default function DiscoverPage(props) {
-    const apiUrl = process.env.NEXT_PUBLIC_API;
-
     const [pageIndex, setPageIndex] = useState(1);
-    const { data, error, isLoading } = useSWR(`${apiUrl}/product/products?page=${pageIndex}`, fetcher);
+    const { data, error, isLoading } = useFetch(`/product/products?page=${pageIndex}`);
     const router = useRouter();
     useEffect(() => {
         router.replace(
@@ -38,7 +27,7 @@ export default function DiscoverPage(props) {
         );
     }, [pageIndex]);
 
-    if (isLoading) return <div style={{ textAlign: "center", color: "#ee4d2d" }}>Loading....</div>;
+    if (isLoading) return <Loading />;
     if (!data) return <div style={{ textAlign: "center" }}>No product data</div>;
 
     const listProduct = data.data.products;
@@ -79,8 +68,8 @@ export default function DiscoverPage(props) {
                             return (
                                 <Link
                                     href={{
-                                        pathname: "/some-page",
-                                        query: item._id,
+                                        pathname: `/products/${item._id}`,
+                                        query: { name: item.name },
                                     }}
                                     key={index}
                                 >

@@ -20,21 +20,22 @@ export const authOptions = {
             name: "Credentials",
             async authorize(credentials) {
                 try {
-                    const user = await axios.post("https://shopee-api.vercel.app/user/login", { email: credentials.email, password: credentials.password });
+                    const user = await axios.post(`${process.env.NEXT_PUBLIC_API}/user/login`, { email: credentials.email, password: credentials.password });
                     if (user) {
                         return user.data;
                     } else {
                         return null;
                     }
                 } catch (error) {
+                    console.log(error)
                     throw new Error(error.response.data);
                 }
             },
         }),
     ],
     pages: {
-        error: "/auth/login",
         signIn: "/auth/login",
+        error: "/auth/login",
     },
     callbacks: {
         async redirect({ url, baseUrl }) {

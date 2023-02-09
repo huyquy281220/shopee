@@ -1,10 +1,8 @@
 import styles from "../../styles/Header/Navbar.module.scss";
 import images from "../../assets/img";
 import NotifyPopover from "./Popover/Notify";
-// import { userSelector, logout } from "../../redux/slices/user";
 
 import { useSession, signIn, signOut } from "next-auth/react";
-import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,11 +12,12 @@ import { faBell, faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import { faChevronDown, faGlobe, faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
-    const dispatch = useDispatch();
     const router = useRouter();
-    // const { userInfo, success } = useSelector(userSelector);
     const { data: session, status } = useSession();
-    console.log(session);
+
+    if (status === "loading") {
+        return <div style={{ textAlign: "center", color: "#ee4d2d" }}>Loading....</div>;
+    }
 
     const handleLogout = () => {
         signOut();
@@ -65,7 +64,7 @@ export default function Navbar() {
                         Thông báo
                     </a>
                     <div className={styles.notify_popup}>
-                        <NotifyPopover />
+                        <NotifyPopover data={session?.user ? true : false} />
                     </div>
                 </div>
                 <a href="" className={styles.navbar_right_item}>

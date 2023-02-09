@@ -13,6 +13,16 @@
             display: flex;
             align-items: center;
 
+            &:last-child {
+                .name {
+                    color: #000;
+                    pointer-events: none;
+                }
+                .icon {
+                    display: none;
+                }
+            }
+
             .name_active {
                 pointer-events: none;
                 font-size: 14px;

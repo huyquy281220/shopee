@@ -1,31 +1,36 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "@reduxjs/toolkit";
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "./storage";
+import thunk from "redux-thunk";
 
-import userReducer from "./slices/user";
+import { cartReducer } from "./slices/cart";
+// import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 
-const rootReducers = combineReducers({
-    user: userReducer,
+const reducers = combineReducers({
+    cart: cartReducer,
 });
 
 const persistConfig = {
     key: "root",
     storage,
-    debug: true,
-    timeout: 500,
+    timeout: 1000
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducers);
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+// const store = configureStore({
+//     reducer: persistedReducer,
+//     middleware: (getDefaultMiddleware) =>
+//         getDefaultMiddleware({
+//             serializableCheck: {
+//                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//             },
+//         }),
+// });
 
 const store = configureStore({
     reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }),
+    middleware: [thunk],
 });
 
 export default store;

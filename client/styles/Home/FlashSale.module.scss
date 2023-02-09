@@ -1,3 +1,5 @@
+@import "../variable";
+
 .wrapper {
     padding: 0 0 20px;
     background-color: #f5f5f5;
@@ -21,7 +23,7 @@
             }
 
             .show_all {
-                color: var(--primary-color);
+                color: $primary-color;
 
                 &_icon {
                     margin-left: 5px;
@@ -66,7 +68,7 @@
 
                         .percent {
                             font-size: 12px;
-                            color: var(--primary-color);
+                            color: $primary-color;
                         }
 
                         .text {
@@ -83,7 +85,7 @@
 
                     .price {
                         margin: 10px 0;
-                        color: var(--primary-color);
+                        color: $primary-color;
                     }
 
                     .progress_bar {

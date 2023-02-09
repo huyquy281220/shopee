@@ -1,0 +1,101 @@
+@import "../variable";
+
+.wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    z-index: 20000;
+
+    .dot_elastic {
+        position: relative;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: $primary-color;
+        animation: dot-elastic 0.75s infinite linear;
+    
+        &::before,
+        &::after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 0;
+        }
+    
+        &::before {
+            left: -15px;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: $primary-color;
+            animation: dot-elastic-before 0.75s infinite linear;
+        }
+    
+        &::after {
+            left: 15px;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: $primary-color;
+            animation: dot-elastic-after 0.75s infinite linear;
+        }
+    }
+}
+
+@keyframes dot-elastic-before {
+    0% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(1, 1.5);
+    }
+    50% {
+        transform: scale(1, 0.67);
+    }
+    75% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+@keyframes dot-elastic {
+    0% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1, 1.5);
+    }
+    75% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+@keyframes dot-elastic-after {
+    0% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1, 0.67);
+    }
+    75% {
+        transform: scale(1, 1.5);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}

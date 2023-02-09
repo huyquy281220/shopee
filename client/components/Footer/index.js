@@ -1,3 +1,9 @@
+import styles from "../../styles/Footer/Footer.module.scss";
+
 export default function Footer() {
-    return <h1>Footer</h1>;
+    return (
+        <div className={styles.wrapper}>
+            <div>Footer</div>
+        </div>
+    );
 }
