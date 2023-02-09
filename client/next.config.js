@@ -3,6 +3,7 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  runtime:"edge",
   // sassOptions: {
   //   includePaths: [path.join(__dirname, 'styles')],
   // },
