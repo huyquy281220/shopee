@@ -43,7 +43,6 @@ export default function Search() {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/search?keyword=${searchValue}`);
-                console.log(res.data);
                 setListSearch(res.data);
             } catch (error) {
                 console.log(error);

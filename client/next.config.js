@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
-// import path
 
 const nextConfig = {
   reactStrictMode: true,
-  // runtime:"edge",
   // sassOptions: {
   //   includePaths: [path.join(__dirname, 'styles')],
   // },
