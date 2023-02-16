@@ -5,6 +5,7 @@ import EmptyLayout from "../../layouts/EmptyLayout";
 import { signIn, useSession } from "next-auth/react";
 import { useState, useRef } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,7 +27,13 @@ export default function Login() {
         signIn("credentials", {
             email: emailRef.current.value,
             password: passwordRef.current.value,
-            redirect: true,
+            redirect: false,
+        }).then((res) => {
+            if (res.status === 200) {
+                router.back();
+            } else {
+                setErrorMessage(res.error);
+            }
         });
     };
 
@@ -44,6 +51,9 @@ export default function Login() {
 
     return (
         <div className={styles.wrapper}>
+            <Head>
+                <title>Đăng Nhập</title>
+            </Head>
             <header>
                 <div className={styles.header_left}>
                     <Link href="/">

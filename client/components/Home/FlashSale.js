@@ -23,7 +23,7 @@ export default function FlashSale() {
                 </div>
                 <div className={styles.content}>
                     <Swiper modules={[Navigation]} slidesPerView={6} slidesPerGroup={6} allowTouchMove={false} navigation className={styles.swiper_wrapper}>
-                        {Array(12)
+                        {Array(6)
                             .fill()
                             .map((item, index) => {
                                 return (

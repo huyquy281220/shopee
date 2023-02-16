@@ -1,0 +1,42 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 11000;
+    transition: display 0.1 cubic-bezier(0.4,0,0.6,1);
+
+    .content {
+        padding: 40px 20px;
+        width: 350px;
+        height: 200px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 2px;
+        text-align: center;
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: #00bfa5;
+            font-size: 35px;
+            color: #fff;
+        }
+
+        .text{
+            margin-top: 30px;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 500;
+        }
+    }
+}
+

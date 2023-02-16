@@ -1,6 +1,7 @@
 import Head from "next/head";
 
 import Home from "../components/Home";
+import NotFound from "./error";
 
 export default function App(props) {
     return (
@@ -9,6 +10,7 @@ export default function App(props) {
                 <title>Shopee</title>
             </Head>
             <Home homeData={props} />
+            {/* <NotFound /> */}
         </>
     );
 }

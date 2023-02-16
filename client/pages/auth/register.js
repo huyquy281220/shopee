@@ -5,6 +5,7 @@ import EmptyLayout from "../../layouts/EmptyLayout";
 import { useState, useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -36,6 +37,7 @@ export default function Register() {
 
     return (
         <div className={styles.wrapper}>
+            <Head><title>Đăng Ký</title></Head>
             <header>
                 <div className={styles.header_left}>
                     <Link href="/">

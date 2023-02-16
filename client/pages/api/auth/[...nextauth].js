@@ -27,7 +27,6 @@ export const authOptions = {
                         return null;
                     }
                 } catch (error) {
-                    console.log(error)
                     throw new Error(error.response.data);
                 }
             },
@@ -35,7 +34,6 @@ export const authOptions = {
     ],
     pages: {
         signIn: "/auth/login",
-        error: "/auth/login",
     },
     callbacks: {
         async redirect({ url, baseUrl }) {

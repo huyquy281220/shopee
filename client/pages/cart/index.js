@@ -3,6 +3,7 @@ import images from "../../assets/img";
 import { NumberWithCommas as fPrice } from "../../utils/formatPrice";
 import { totalMoney } from "../../utils/totalMoney";
 import { cartSelector, incrementItem, decrementItem, changeQuantityItem, removeItem } from "../../redux/slices/cart";
+import ProtectedRoute from "../../components/common/ProtectedRoute";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useState } from "react";
@@ -16,13 +17,23 @@ export default function Cart() {
     const checkAllRef = useRef(null);
     const [itemSelected, setItemSelected] = useState([]);
     const cartData = useSelector(cartSelector);
-    const cart = cartData.cart;
+
+    if (!cartData) {
+        return (
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "calc(100vh - 220px)" }}>
+                <div>
+                    <Image src={images.cart} alt="cart" width={108} />
+                    <p>Giỏ hàng trống</p>
+                </div>
+            </div>
+        );
+    }
 
     const handleCheck = () => {
         let listItemChecked = [];
         checkBoxRef.current.map((item, index) => {
             if (item.checked === true) {
-                listItemChecked.push(cart[index]);
+                listItemChecked.push(cartData[index]);
             }
         });
         if (listItemChecked.length === checkBoxRef.current.length) {
@@ -44,14 +55,15 @@ export default function Cart() {
     const handleMinus = (index) => {
         if (valueRef.current[index].value > 1) {
             valueRef.current[index].value--;
-            dispatch(decrementItem(cart[index]));
+            dispatch(decrementItem(cartData[index]));
         } else {
             valueRef.current[index].value = 1;
         }
     };
+
     const handlePlus = (index) => {
         valueRef.current[index].value++;
-        dispatch(incrementItem(cart[index]));
+        dispatch(incrementItem(cartData[index]));
     };
 
     const handleValueChange = (index) => {
@@ -60,33 +72,33 @@ export default function Cart() {
         } else if (valueRef.current[index].value > 99) {
             valueRef.current[index].value = 99;
         }
-        dispatch(changeQuantityItem({ item: cart[index], selected: valueRef.current[index].value }));
+        dispatch(changeQuantityItem({ item: cartData[index], selected: valueRef.current[index].value }));
     };
 
     const handleRemove = (id) => {
-        dispatch(removeItem(id))
+        dispatch(removeItem(id));
     };
 
     return (
-        <div className={styles.wrapper}>
-            <Head>
-                <title>Giỏ Hàng</title>
-            </Head>
-            <div className={styles.content}>
-                <div className={styles.transport}>
-                    <Image src={images.transport_icon} alt="transport" width={23} height={14} />
-                    <span>Nhấn vào mục Mã giảm giá ở cuối trang để hưởng miễn phí vận chuyển bạn nhé!</span>
-                </div>
-                <div className={styles.list_header}>
-                    <input type="checkbox" className={styles.box} ref={checkAllRef} name="check-all" onChange={(e) => handleCheckAll(e)} />
-                    <div style={{ width: "45%", paddingLeft: "10px" }}>Sản phẩm</div>
-                    <div style={{ width: "16%", textAlign: "center", color: "#888" }}>Đơn giá</div>
-                    <div style={{ width: "15%", textAlign: "center", color: "#888" }}>Số lượng</div>
-                    <div style={{ width: "10%", textAlign: "center", color: "#888" }}>Số tiền</div>
-                    <div style={{ width: "13%", textAlign: "center", color: "#888" }}>Thao tác</div>
-                </div>
-                {cart?.length > 0 ? (
-                    cart.map((item, index) => {
+        <ProtectedRoute>
+            <div className={styles.wrapper}>
+                <Head>
+                    <title>Giỏ Hàng</title>
+                </Head>
+                <div className={styles.content}>
+                    <div className={styles.transport}>
+                        <Image src={images.transport_icon} alt="transport" width={23} height={14} />
+                        <span>Nhấn vào mục Mã giảm giá ở cuối trang để hưởng miễn phí vận chuyển bạn nhé!</span>
+                    </div>
+                    <div className={styles.list_header}>
+                        <input type="checkbox" className={styles.box} ref={checkAllRef} name="check-all" onChange={(e) => handleCheckAll(e)} />
+                        <div style={{ width: "45%", paddingLeft: "10px" }}>Sản phẩm</div>
+                        <div style={{ width: "16%", textAlign: "center", color: "#888" }}>Đơn giá</div>
+                        <div style={{ width: "15%", textAlign: "center", color: "#888" }}>Số lượng</div>
+                        <div style={{ width: "10%", textAlign: "center", color: "#888" }}>Số tiền</div>
+                        <div style={{ width: "13%", textAlign: "center", color: "#888" }}>Thao tác</div>
+                    </div>
+                    {cartData.map((item, index) => {
                         return (
                             <div className={styles.item} key={index}>
                                 <input
@@ -124,30 +136,21 @@ export default function Cart() {
                                     <p>đ{fPrice(item.price * item.selected)}</p>
                                 </div>
                                 <div className={styles.action}>
-                                    <button onClick={()=>handleRemove(item._id)}>Xóa</button>
+                                    <button onClick={() => handleRemove(item._id)}>Xóa</button>
                                 </div>
                             </div>
                         );
-                    })
-                ) : (
-                    <p>Giỏ Hàng Trống</p>
-                )}
-                <div className={styles.pay}>
-                    {/* <div className={styles.select_all}>
-                        <input type="checkbox" className={styles.box} ref={(el) => (checkAllRef.current = el)} name="check-all" onChange={(e) => handleCheckAll(e)} />
-                        <button>
-                            Chọn tất cả&nbsp;
-                            <span>({cart?.length})</span>
-                        </button>
-                    </div> */}
-                    <div className={styles.total_money}>
-                        <p>
-                            Tổng thanh toán (<span>{itemSelected.length}</span> sản phẩm): <span className={styles.value}>đ{totalMoney(itemSelected)}</span>
-                        </p>
-                        <button>Mua hàng</button>
+                    })}
+                    <div className={styles.pay}>
+                        <div className={styles.total_money}>
+                            <p>
+                                Tổng thanh toán (<span>{itemSelected.length}</span> sản phẩm): <span className={styles.value}>đ{totalMoney(itemSelected)}</span>
+                            </p>
+                            <button>Mua hàng</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </ProtectedRoute>
     );
 }

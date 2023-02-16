@@ -5,7 +5,6 @@ import FlashSale from "./FlashSale";
 import ShopeeMall from "./ShopeeMall";
 import TopSearch from "./TopSearch.js";
 import Suggestion from "./Suggestion.js";
-import Loading from "../common/Loading.js";
 
 export default function Home({ homeData }) {
     const { products, categories } = homeData;
@@ -19,8 +18,6 @@ export default function Home({ homeData }) {
             <ShopeeMall />
             <TopSearch />
             <Suggestion data={products} />
-            {/* <Suggestion /> */}
-            {/* <Loading /> */}
         </div>
     );
 }

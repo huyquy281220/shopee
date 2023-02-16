@@ -2,25 +2,29 @@ import styles from "./ProductDetail.module.scss";
 import images from "../../assets/img";
 import Breadcrumbs from "../../components/common/Breadcrumb";
 import Loading from "../../components/common/Loading";
+import NotFound from "../error";
+import Toast from "../../components/common/toast";
 import { NumberWithCommas as fPrice } from "../../utils/formatPrice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck, faHeart, faCartPlus, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../hooks/useFetch";
-import { addToCart } from "../../redux/slices/cart";
+import { addToCart, cartSelector } from "../../redux/slices/cart";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
-import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ProductDetail() {
     const dispatch = useDispatch();
     const inputRef = useRef();
+    const [display, setDisplay] = useState("none");
     const { asPath, query, push } = useRouter();
     const { data: session, status } = useSession();
+    const cartData = useSelector(cartSelector);
 
     const listPath = asPath.split("/");
     const productId = listPath[listPath.length - 1].split("?")[0];
@@ -30,12 +34,20 @@ export default function ProductDetail() {
     const { data, error, isLoading } = useFetch(`/product/${productId}`);
 
     if (isLoading) return <Loading />;
-    if (!data) return <div style={{ textAlign: "center" }}>No product data</div>;
+    if (!data) return <NotFound />;
 
     const productInfo = data?.data;
 
     const handleAddToCart = () => {
-        dispatch(addToCart({ item: productInfo, selected: inputRef.current.value }));
+        if (!session) {
+            push("/auth/login");
+        } else {
+            dispatch(addToCart({ item: productInfo, selected: inputRef.current.value }));
+            setDisplay("flex");
+            setTimeout(() => {
+                setDisplay("none");
+            }, 2000);
+        }
     };
 
     const handleMinus = () => {
@@ -57,8 +69,12 @@ export default function ProductDetail() {
         }
     };
     const handleBuy = () => {
-        dispatch(addToCart({ item: productInfo, selected: inputRef.current.value }));
-        push("/cart");
+        if (!session) {
+            push("/auth/login");
+        } else {
+            dispatch(addToCart({ item: productInfo, selected: inputRef.current.value }));
+            push("/cart");
+        }
     };
 
     return (
@@ -176,11 +192,13 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </div>
+            <Toast display={display} />
         </div>
     );
 }
 
 export async function getServerSideProps(context) {
+    const {params} = context;
     return {
         props: {},
     };
