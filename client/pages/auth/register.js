@@ -12,8 +12,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
-    const router = useRouter();
+    // const router = useRouter();
     const [isToggle, setIsToggle] = useState(false);
+    const [error, setError] = useState("");
     const emailRef = useRef("");
     const pwdRef = useRef("");
 
@@ -21,9 +22,13 @@ export default function Register() {
         setIsToggle(!isToggle);
     };
 
+    const handleSetError = () => {
+        setError("");
+    };
+
     const handleSignUp = async (e) => {
         e.preventDefault();
-
+        
         try {
             await axios.post(`${process.env.NEXT_PUBLIC_API}/user/register`, {
                 email: emailRef.current.value,
@@ -31,13 +36,15 @@ export default function Register() {
             });
             router.push("/auth/login");
         } catch (error) {
-            console.log(error);
+            setError(error.response.data);
         }
     };
 
     return (
         <div className={styles.wrapper}>
-            <Head><title>Đăng Ký</title></Head>
+            <Head>
+                <title>Đăng Ký</title>
+            </Head>
             <header>
                 <div className={styles.header_left}>
                     <Link href="/">
@@ -59,13 +66,13 @@ export default function Register() {
                             </div>
                             <div className={styles.form_content}>
                                 <div className={styles.email}>
-                                    <input type="email" ref={emailRef} placeholder="Email/Số điện thoại/Tên đăng nhập" autoComplete="on" maxLength={128} required />
+                                    <input type="email" ref={emailRef} placeholder="Email" autoComplete="on" maxLength={128} required onChange={handleSetError} />
                                 </div>
                                 <div className={styles.password}>
-                                    <input type={isToggle ? "text" : "password"} ref={pwdRef} placeholder="Mật khẩu" maxLength={128} required />
+                                    <input type={isToggle ? "text" : "password"} ref={pwdRef} placeholder="Mật khẩu" maxLength={128} required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,20}$" title="Mật khẩu phải chứa ít nhất 1 chữ số, 1 chữ thường, 1 chữ hoa và không chứa ký tự đặc biệt. Độ dài từ 8 đến 20 ký tự." onChange={handleSetError} />
                                     <FontAwesomeIcon icon={isToggle ? faEyeSlash : faEye} className={styles.eye} onClick={hanldeTogglePassword} />
                                 </div>
-                                <p className={styles.error}></p>
+                                <p className={styles.error}>{error}</p>
                                 <button type="submit" className={styles.btn_register}>
                                     Đăng ký
                                 </button>

@@ -14,6 +14,12 @@ class CustomerController {
                 email: req.body?.email,
                 password: CryptoJS.AES.encrypt(req.body?.password, process.env.SALT).toString(),
             });
+
+            const oldCustomer = await Customer.find({ email: req.body?.email });
+            if (oldCustomer) {
+                return res.status(403).json("Email is already in use.");
+            }
+
             const newCustomer = await customerData.save();
             const newCart = new Cart({ user: customerData._id });
             await newCart.save();

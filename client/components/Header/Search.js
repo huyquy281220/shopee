@@ -23,6 +23,8 @@ export default function Search() {
 
     const cart = cartData.cart;
 
+    console.log(session.user.email);
+
     useEffect(() => {
         dispatch(
             syncCart({

@@ -30,7 +30,7 @@ export default function Login() {
             redirect: false,
         }).then((res) => {
             if (res.status === 200) {
-                router.back();
+                router.push("/");
             } else {
                 setErrorMessage(res.error);
             }
