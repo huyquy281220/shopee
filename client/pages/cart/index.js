@@ -18,7 +18,9 @@ export default function Cart() {
     const [itemSelected, setItemSelected] = useState([]);
     const cartData = useSelector(cartSelector);
 
-    if (!cartData) {
+    const cart = cartData.cart;
+
+    if (cart?.length === 0) {
         return (
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "calc(100vh - 220px)" }}>
                 <div>
@@ -33,7 +35,7 @@ export default function Cart() {
         let listItemChecked = [];
         checkBoxRef.current.map((item, index) => {
             if (item.checked === true) {
-                listItemChecked.push(cartData[index]);
+                listItemChecked.push(cart[index]);
             }
         });
         if (listItemChecked.length === checkBoxRef.current.length) {
@@ -55,7 +57,7 @@ export default function Cart() {
     const handleMinus = (index) => {
         if (valueRef.current[index].value > 1) {
             valueRef.current[index].value--;
-            dispatch(decrementItem(cartData[index]));
+            dispatch(decrementItem(cart[index]));
         } else {
             valueRef.current[index].value = 1;
         }
@@ -63,7 +65,7 @@ export default function Cart() {
 
     const handlePlus = (index) => {
         valueRef.current[index].value++;
-        dispatch(incrementItem(cartData[index]));
+        dispatch(incrementItem(cart[index]));
     };
 
     const handleValueChange = (index) => {
@@ -72,7 +74,7 @@ export default function Cart() {
         } else if (valueRef.current[index].value > 99) {
             valueRef.current[index].value = 99;
         }
-        dispatch(changeQuantityItem({ item: cartData[index], selected: valueRef.current[index].value }));
+        dispatch(changeQuantityItem({ item: cart[index], selected: valueRef.current[index].value }));
     };
 
     const handleRemove = (id) => {
@@ -98,7 +100,7 @@ export default function Cart() {
                         <div style={{ width: "10%", textAlign: "center", color: "#888" }}>Số tiền</div>
                         <div style={{ width: "13%", textAlign: "center", color: "#888" }}>Thao tác</div>
                     </div>
-                    {cartData.map((item, index) => {
+                    {cart?.map((item, index) => {
                         return (
                             <div className={styles.item} key={index}>
                                 <input

@@ -15,7 +15,7 @@ export default function Breadcrumbs(props) {
                 {listBreadcrumbs.length > 0 &&
                     listBreadcrumbs.map((item, index) => {
                         return (
-                            <li className={styles.item} key={item}>
+                            <li className={styles.item} key={index}>
                                 <Link href="/" className={styles.name}>
                                     {item}
                                 </Link>
