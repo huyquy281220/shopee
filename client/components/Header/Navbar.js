@@ -87,7 +87,7 @@ export default function Navbar() {
                 {session?.user ? (
                     <div className={styles.user_wrapper}>
                         <div className={styles.user_avatar}>{session.user.image ? <img src={session.user.image} alt="logo" width={20} height={20} /> : <FontAwesomeIcon icon={faUser} style={{ width: "20px", height: "20px" }} />}</div>
-                        <span className={styles.username}>{session.user.name}</span>
+                        <span className={styles.username}>{(session.user.email).split("@")[0]}</span>
                         <div className={styles.dropdown}>
                             <Link href="#" className={styles.dropdown_item}>
                                 Tài khoản của tôi

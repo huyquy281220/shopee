@@ -3,8 +3,10 @@ import axios from "axios";
 
 export const syncCart = createAsyncThunk("cart/sync", async ({ email, cart }) => {
     try {
-        const cartData = await axios.post(`http://localhost:4000/cart`, { email, cart });
-        return cartData.data.products;
+        if (email) {
+            const cartData = await axios.post(`${process.env.NEXT_PUBLIC_API}/cart`, { email, cart });
+            return cartData.data.products;
+        }
     } catch (error) {
         console.log(error);
     }

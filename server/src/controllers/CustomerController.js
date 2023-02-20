@@ -10,12 +10,12 @@ class CustomerController {
     async register(req, res, next) {
         try {
             const customerData = new Customer({
-                name: req.body?.name || "user123",
                 email: req.body?.email,
                 password: CryptoJS.AES.encrypt(req.body?.password, process.env.SALT).toString(),
             });
-
-            const oldCustomer = await Customer.find({ email: req.body?.email });
+            const username = (customerData.email).split("@")[0];
+            customerData.name = username;
+            const oldCustomer = await Customer.findOne({ email: req.body?.email });
             if (oldCustomer) {
                 return res.status(403).json("Email is already in use.");
             }

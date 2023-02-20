@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
-    // const router = useRouter();
+    const router = useRouter();
     const [isToggle, setIsToggle] = useState(false);
     const [error, setError] = useState("");
     const emailRef = useRef("");
@@ -28,15 +28,15 @@ export default function Register() {
 
     const handleSignUp = async (e) => {
         e.preventDefault();
-        
+
         try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API}/user/register`, {
+            await axios.post(`http://localhost:4000/user/register`, {
                 email: emailRef.current.value,
                 password: pwdRef.current.value,
             });
             router.push("/auth/login");
         } catch (error) {
-            setError(error.response.data);
+            setError(error.response?.data);
         }
     };
 
